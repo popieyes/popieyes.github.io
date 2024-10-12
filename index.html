@@ -1,8 +1,107 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <div id="navbar">
+
+        <a href="">Coding</a>
+        <a href="">ABOUT ME</a>
+        <a href="">SKETCHBOOK</a>
+
+    </div>
+
+    <style>
+
+        body {
+            background-color: aliceblue;
+        }
+
+        a {
+            font-size: 50px;
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 10px solid green;
+        }
+        h1 {
+            text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            border: 10px solid green;
+        }
+        p {
+            font-family: Verdana;
+            text-align: center;
+            border: 10px solid green;
+        }
+        #navbar {
+            padding: 5%;
+            background-color: black;
+            border: 10px solid green;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            transition: top 0.3s;
+        }
+
+        .SmallContainers {
+            margin: auto;
+            margin-top: 20px;
+            background-color: antiquewhite;
+            width: 50%;
+            border: 10px solid green;
+            padding: 10px;
+            text-align: center;
+         
+        }
+
+    </style>
+</head>
+    
+
 <body>
+
+    <div class="SmallContainers">
+        <h1>ABOUT ME</h1>
+        <img style="max-width: 300px; "src="_MG_0021.jpg"/>
+        <p>
+            I'm a Spanish game developer located in Madrid, Spain. My work mainly focuses on gameplay programming,
+            having worked at Kumiho Esports S.L as Lead Programmer, designing and implementing mechanics in a League Of Legends inspired project, called Nexus Legends.
+            Not only my skills limit to game design/development but I also enjoy applying my more artistical side, which I have been developing over the years, mostly in my free time,
+            to all the works I develop and display.
+            <br /><br />
+            Making use of my image editing, illustration and video editing skills I am also able to not only produce great works but know the right way to display them and make them visually appealing.
+            <br /><br />
+            My journey started at Rey Juan Carlos University where I studied Videogames Design and Development Degree, followed by a Master in Computer Graphics. There I learned and honed my programming skills,
+            while also participated in several Game Jams with teammates from class, making small projects that would eventually lead to being able to present one at Gamescom 2023, in Games Made in Spain Section.
+            Touching all kind of programming languages, I specialised in Unity and therefore C#, making it my go-to game engine for developing games.
+            <br /><br />
+            Wanna know more?
+            <br />
+            ...
+        </p>
+
+    </div>
 <h1>MY PORTFOLIO</h1>
-<p> I'm hosted</p>
+
+
+    <h1>CODING</h1>
+    <h1>ILLUSTRATIONS</h1>
+    <h1>VIDEO EDITING</h1>
+
+
+<script>
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("navbar").style.top = "0";
+        } else {
+            document.getElementById("navbar").style.top = "-200px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+
+</script>
 </body>
+
 
 </html>
