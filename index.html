@@ -5,173 +5,39 @@
 
     <link rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <style>
-
-        body {
-            background-color: #f1f1f1;
-            font-family: "Niagara Solid";
-            margin: 0;
-        }
-
-        a {
-            font-size: 20px;
-            color: white;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 150px;
-            word-break: break-all;
-        }
-
-        p {
-            font-family: Verdana;
-            text-align: center;
-        }
-      
-        .trailer-content {
-            position: relative;
-            margin: 0;
-        }
-
-        .trailer-content div{
-            position: absolute;
-        }
-        .trailer-content video {
-            width: 100%;
-            min-height: 100%;
-
-        }
-            .trailer-content:before {
-                content: '';
-                position: absolute;
-                background-color: rgba(0,0,0,0.7);
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
-
-        .trailer-info {
-            text-align: center;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            
-            color: #f1f1f1;
-        }
-
-        .trailer-info h1{
-           margin: 0;
-        }
-
-        .trailer-info h3 {
-            font-family: 'Bernard MT';
-            font-size: 50px;
-            margin: 0;
-        }
-
-     
-        .container {
-            width: 100%;
-          
-
-
-        }
-
-        .navbar {
-     
-            display: flex;
-            top: 0;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-           
-            text-align: center;
-        }
-
-        .navbar a {
-            font-size: 40px;
-            padding: 20px;
-           
-        }
-
-        @media (min-width: 475px) {
-            .container{
-                min-width: 475px;
-            }
-        }
-
-        @media(min-width: 640px) {
-            .container {
-                min-width: 640px;
-            }
-
-          
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                min-width: 768px;
-            }
-        }
-        @media (min-width: 1024px) {
-            .container {
-                min-width: 1024px;
-            }
-        }
-
-        @media (min-width: 1280px) {
-            .container {
-                min-width: 1280px;
-            }
-
-           
-
-        }
-        @media (min-width: 1536px) {
-            .container {
-                min-width: 1536px;
-            }
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="main-styles.css" />
+    <link rel="stylesheet" href="media-queries.css" />
 </head>
     
 
 <body>
 
-    <div class="site-container">
-       
-        <div class="trailer-content ">
+    <div class="trailer-content container">
 
-            <video autoplay muted loop id="myVideo">
-                <source src="prince of persia.mp4" type="video/mp4">
-            </video>
+        <video autoplay muted loop id="myVideo">
+            <source src="prince of persia.mp4" type="video/mp4">
+        </video>
 
-            <div class="trailer-info container">
-                <h3>MAKE AN IDEA COME TO LIFE WITH</h3>
-                <h1>SANTIAGO MENESES GÓMEZ</h1>
-                <p>WEBSITE DONE IN HTML, CSS & JAVASCRIPT</p>
-
-            </div>
-
-            <div class="container navbar">
-                
-                    <a href="">DESIGNS</a>
-                    <a href="">SKETCHBOOK</a>
-                    <a href="">ABOUT ME</a>
-                    <a href="">CONTACT</a>
-                
-            </div>
-         
-
+        <div class="trailer-info ">
+            <h3>MAKE AN IDEA COME TO LIFE WITH</h3>
+            <h1>SANTIAGO MENESES GÓMEZ</h1>
+            <p>WEBSITE DONE IN HTML, CSS & JAVASCRIPT</p>
 
         </div>
 
-        <h1></h1>
+        <div class="container navbar">
+            
+                <a href="">DESIGNS</a>
+                <a href="">SKETCHBOOK</a>
+                <a href="">ABOUT ME</a>
+                <a href="">CONTACT</a>
+            
+        </div>
+     
+
+
     </div>
+   
    
 
 

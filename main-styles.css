@@ -1,0 +1,102 @@
+
+.container {
+    width: 100%;
+    display: flex;
+}
+
+body {
+    background-color: #f1f1f1;
+    font-family: "Niagara Solid";
+    margin: 0;
+}
+
+a {
+    font-size: 20px;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 150px;
+    word-break: break-all;
+}
+
+p {
+    font-family: Verdana;
+    text-align: center;
+}
+
+.trailer-content {
+    position: relative;
+    margin: 0;
+    flex: 1;
+    overflow:hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+    .trailer-content div {
+        position: absolute;
+    }
+
+    .trailer-content video {
+        position: absolute;
+        width: auto;
+        height: auto;
+        min-width: 100%;
+        min-height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .trailer-content:before {
+        content: '';
+        position: absolute;
+        background-color: rgba(0,0,0,0.7);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+.trailer-info {
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f1f1f1;
+    font-size: 150px;
+}
+
+    .trailer-info h1 {
+        margin: 0;
+        
+    }
+
+    .trailer-info p {
+        font-size: 20px;
+    }
+    .trailer-info h3 {
+        font-family: 'Bernard MT';
+        font-size: 50px;
+        margin: 0;
+    }
+
+
+
+
+.navbar {
+    display: flex;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    text-align: center;
+}
+
+    .navbar a {
+        font-size: 40px;
+        padding: 20px;
+    }
+
