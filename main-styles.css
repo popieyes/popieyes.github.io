@@ -2,6 +2,15 @@
 .container {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.flex-item {
+    flex: 1 1 300px;
+    background-color: lightgray;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 body {
@@ -29,7 +38,7 @@ p {
 .trailer-content {
     position: relative;
     margin: 0;
-    flex: 1;
+
     overflow:hidden;
     height: 100vh;
     width: 100vw;
@@ -99,4 +108,6 @@ p {
         font-size: 40px;
         padding: 20px;
     }
+
+.
 

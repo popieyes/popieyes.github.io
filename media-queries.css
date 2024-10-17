@@ -39,6 +39,12 @@
 @media (min-width: 1280px) {
     .container {
         min-width: 1280px;
+        
+    }
+
+    .navbar a {
+        font-size: 20px;
+        padding: 20px;
     }
 
     .container h1 {
@@ -49,6 +55,12 @@
 @media (min-width: 1536px) {
     .container {
         min-width: 1536px;
+
+    }
+
+    .navbar a {
+        font-size: 100%;
+  
     }
 
     .container h1 {
