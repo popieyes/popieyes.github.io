@@ -17,7 +17,7 @@
     <header>
         <div>Popieyes</div>
 
-        <div class="navbar">
+        <div class="navbar" id="navbar">
 
             <a href="">DESIGNS</a>
             <a href="">SKETCHBOOK</a>
@@ -26,7 +26,7 @@
 
         </div>
 
-
+        <button class="hamburger" id="hamburger">&#9776;</button>
 
     </header>
 
@@ -52,9 +52,17 @@
         </div>
 
     </div>
-    
 
 
+    <script>// Select the hamburger button and the navbar
+    const hamburger = document.getElementById('hamburger');
+    const navbar = document.getElementById('navbar');
+
+    // Add a click event listener to the hamburger
+    hamburger.addEventListener('click', function() {
+        // Toggle the 'active' class on the navbar
+        navbar.classList.toggle('active');
+    });</script>
     <!---
        <div class="trailer-content container">
 

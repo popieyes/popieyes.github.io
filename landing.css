@@ -44,7 +44,15 @@ header div:nth-child(1)
         margin: 10px;
     }
 
-
+.hamburger {
+     /* Hide by default */
+    display: none;
+    background: none;
+    border: none;
+    color: #eee;
+    font-size: 2em;
+    cursor: pointer;
+}
 .banner {
    
     background-image: url(ship.jpg);
@@ -111,14 +119,67 @@ header div:nth-child(1)
     .banner .content {
         font-size: 4px;
     }
+
     .navbar a {
         padding: 3px;
         font-size: 15px;
     }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #222;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .navbar a {
+        width: 100%;
+        text-align: center;
+        border: none;
+        margin: 0;
+    }
+
 }
 
  @media screen and (max-width: 425px) {
         .banner .content {
             font-size: 3px;
+        }
+
+        .navbar {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background-color: #222;
+
+        }
+
+        .hamburger{
+            display: flex;
+
+        }
+
+        .navbar.active{
+            display: flex;
+        }
+        .navbar a {
+            width: 100%;
+            text-align: center;
+            border: none;
+            margin: 0;
         }
 }
