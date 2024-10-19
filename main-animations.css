@@ -1,5 +1,5 @@
 .wrapper {
-    width: 90vh;
+    width: 90%;
     max-width: 1536px;
     margin-inline: auto;
     position: relative;
@@ -7,9 +7,7 @@
     margin-top: 5rem;
     overflow: hidden;
     mask-image: linear-gradient( to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) );
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%);
+  
 }
 
 @keyframes scrollLeft {
