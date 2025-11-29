@@ -1,0 +1,112 @@
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  padding: 1rem 5rem;
+}
+/* ======== HERO SECTION ======== */
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.hero-content {
+  margin: 0.5rem 2rem;
+  text-align: center;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+.hero-title {
+  font-size: 5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+ 
+  min-height: 4rem;
+  font-variant: small-caps;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  color: #e5e7eb;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.about-section {
+  max-width: 40vw;
+}
+
+
+.about-section,
+.skills-section,
+.projects-section,
+.contact-section {
+  background: transparent;
+  align-items: flex-start;
+}
+
+
+
+
+.section-title {
+  font-size: var(--text-size-lg);
+  font-weight: 700;
+  margin: 1.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  
+}
+.section-content {
+  font-size: var(--text-size-md);
+  max-width: 20vw;
+  margin: 3rem 1.5rem;
+  padding: 2rem;
+  border-style: solid;
+  border-width: 2px;
+}
+.section-subtitle {
+  font-size: var(--text-size-md);
+  opacity: 0.9;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth scrolling for the sections container */
+.scroll-sections {
+  scroll-behavior: smooth;
+}
+
+/* ===== SKILLS GRID ===== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+.skill {
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    padding: 0.6rem;
+    display:flex;
+    gap: 0.6rem;
+    align-items: center;
+    transition: transform 250ms ease, box-shadow 250ms ease;
+}
+.skill img { width: 48px; height: 48px; object-fit: contain; }
+.skill-info h4 { margin: 0; font-size: 1rem; }
+.skill-info small { color: rgba(255,255,255,0.8); }
+.skill:hover { transform: translateY(-6px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+
+.skills-content {
+  border-width: 0px;
+}
+
