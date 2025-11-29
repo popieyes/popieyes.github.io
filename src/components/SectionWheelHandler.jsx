@@ -6,7 +6,7 @@ export default function SectionWheelHandler() {
   const scrollTimeout = useRef(null)
   const currentSectionRef = useRef(currentSection)
   
-  const sections = ['hero', 'about', 'skills', 'projects', 'contact']
+  const sections = ['hero', 'about', 'skills', 'projects', 'contact', 'easter']
 
   // Keep ref in sync
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function SectionWheelHandler() {
   const scrollToSection = (sectionName) => {
     const sectionElement = document.querySelector(`[data-section="${sectionName}"]`)
     if (sectionElement) {
-      console.log("Scrolling " + sectionName + "into view")
+      /* console.log("Scrolling " + sectionName + "into view") */
       sectionElement.scrollIntoView({ 
         behavior: 'smooth',
         block: 'start' // Align to top of viewport
@@ -42,7 +42,7 @@ export default function SectionWheelHandler() {
         
         setCurrentSection(nextSection)
         scrollToSection(nextSection) // Scroll to the section
-        console.log("Moving to next section: " + nextSection)
+        /* console.log("Moving to next section: " + nextSection) */
         
       } else if (delta < 0 && currentIndex > 0) {
         event.preventDefault()
@@ -51,7 +51,7 @@ export default function SectionWheelHandler() {
         
         setCurrentSection(prevSection)
         scrollToSection(prevSection) // Scroll to the section
-        console.log("Moving to previous section: " + prevSection)
+        /* console.log("Moving to previous section: " + prevSection) */
       }
     }
 

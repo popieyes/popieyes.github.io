@@ -34,7 +34,7 @@ export default function About({ onSectionEnter }) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <b>I am a Graphics Programmer currently working in the research team MSLab in Rey Juan Carlos University.</b>
+              <b>Graphics Programmer currently working in the research team MSLab in Rey Juan Carlos University.</b>
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
@@ -49,16 +49,20 @@ export default function About({ onSectionEnter }) {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              In my work as a research assistant, I focus on integrating and optimizing a full pipeline for the generation, assembly and simulation of garment patterns.
-               This involves leveraging several technologies and creating algorithms to process each pattern to prepare them for simulation.
+              In my work as a research assistant, 
+              I focus on integrating a 
+              full pipeline for the generation, 
+              assembly and simulation of garment patterns.
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              As of my free time, I like creating small games and prototypes, participating in game jams, and coding graphics-related projects. 
-              When I am not in front of a computer (working...), I enjoy playing videogames, discovering new places to eat, going to the gym, taking pictures, drawing, writing songs, travelling, going to the club...
+              As of my free time, I like participating in game jams,  
+              playing videogames, discovering new places, 
+              going to the gym, taking pictures, drawing, writing songs, 
+              travelling, going to the club...
               And the list goes on!
             </motion.p>
             </div>

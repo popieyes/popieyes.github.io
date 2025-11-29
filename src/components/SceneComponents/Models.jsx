@@ -1,4 +1,5 @@
 import { useGLTF ,Gltf } from '@react-three/drei'
+import { Suspense } from 'react'
 
 export function Office(){
     return (
@@ -6,7 +7,7 @@ export function Office(){
             <Gltf 
             castShadow 
             receiveShadow 
-            src="/models/office-mod.glb" 
+            src="/models/office.glb" 
             position={[-0.5, 0, -1.2]} />
             <Gltf 
             castShadow 

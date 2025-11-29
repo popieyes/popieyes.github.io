@@ -11,6 +11,7 @@ import Skills from './components/Sections/Skills'
 import Projects from './components/Sections/Projects'
 import Contact from './components/Sections/Contact'
 import SectionWheelHandler from './components/SectionWheelHandler'
+import EasterEgg from './components/Sections/EasterEgg'
 import { ScrollProvider,useScroll } from './hooks/useScrollContext'
 
 function AppContent() {
@@ -23,6 +24,7 @@ function AppContent() {
     projects: { position: [0.5, 1.3, 1.5], lookAt: [-.5, 1.3, 1.1] },
     skills: { position: [0.5, 1.25, -0.5], lookAt: [-2, 1, 0] },
     contact: { position: [0, 1, 1], lookAt: [-2, 0, 0] },
+    easter: { position: [0, 0, 1], lookAt: [-2, 0, 0] }
   }
 
   const handleGetStarted = () => {
@@ -90,6 +92,10 @@ function AppContent() {
               
               <Contact
                 onSectionEnter={() => handleSectionEnter('contact')}
+              />
+
+              <EasterEgg
+                onSectionEnter={() => handleSectionEnter('easter')}
               />
             </div>
           )}

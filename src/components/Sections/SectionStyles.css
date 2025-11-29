@@ -4,50 +4,172 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  padding: 1rem 5rem;
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.section-title {
+  font-size: var(--text-10xl);
+  font-weight: 700;
+  margin: 1.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  
+}
+.section-content {
+  font-size: var(--text-md);
+  max-width: 20vw;
+  margin: 3rem 1.5rem;
+  padding: 2rem;
+  border-style: solid;
+  border-width: 2px;
+}
+.section-subtitle {
+  font-size: var(--text-md);
+  opacity: 0.9;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth scrolling for the sections container */
+.scroll-sections {
+  scroll-behavior: smooth;
+}
+
+/* ======== RESPONSIVE BREAKPOINTS ======== */
+/* Mobile First Approach - Base styles are for mobile */
+
+/* Small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  .section {
+    padding: var(--space-xs) var(--space-sm);
+  }
+}
+
+/* Medium devices (tablets, 768px and down) */
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+/* Large devices (desktops, 1200px and down) */
+@media (max-width: 1200px) {
+  .section {
+    padding: var(--space-sm) var(--space-lg);
+  }
+}
+
+/* Section Content Responsive */
+@media(min-width: 768px) {
+  .section-title {
+    font-size: var(--text-xl);
+    
+  }
+  .section-content {
+    font-size: var(--text-md);
+    max-width: 70vw;
+    margin: var(--space-lg) var(--space-md);
+  }
+  
+  .section-subtitle {
+    font-size: var(--text-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-title {
+    font-size: var(--text-5xl);
+    margin: var(--space-sm);
+  }
+  .section-content {
+    max-width: 50vw;
+    margin: var(--space-sm) var(--space-sm);
+    padding: var(--space-sm);
+  }
+}
+
+@media (min-width: 1440px) {
+  .section-content {
+    max-width: 40vw; /* Large screens */
+  }
 }
 /* ======== HERO SECTION ======== */
-
 .hero-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
+  text-align: center;
 }
 
 .hero-content {
-  margin: 0.5rem 2rem;
+  margin: var(--space-xs) var(--space-sm);
   text-align: center;
-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   width: 100%;
+  max-width: 1200px; /* Prevent content from getting too wide */
 }
+
 .hero-title {
-  font-size: 5rem;
+  font-size: var(--text-3xl); /* Base size for mobile */
   font-weight: 700;
-  margin-bottom: 1.5rem;
- 
+  margin-bottom: var(--space-md);
   min-height: 4rem;
   font-variant: small-caps;
+  line-height: 1.2;
 }
 
 .hero-subtitle {
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
+  font-size: var(--text-base);
+  margin-bottom: var(--space-md);
   opacity: 0.9;
   color: #e5e7eb;
+  line-height: 1.4;
 }
 
 .hero-description {
-  font-size: 1.1rem;
+  font-size: var(--text-sm);
   line-height: 1.6;
   opacity: 0.8;
 }
 
-.about-section {
-  max-width: 40vw;
+/* Hero Responsive Adjustments */
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: var(--text-4xl);
+  }
+  
+  .hero-subtitle {
+    font-size: var(--text-md);
+  }
+  
+  .hero-description {
+    font-size: var(--text-base);
+  }
 }
 
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: var(--text-5xl);
+  }
+}
 
+/* ======== ABOUT SECTION ======== */
+.about-section {
+  max-width: 90vw; /* Mobile first - use most of viewport */
+}
+
+@media (min-width: 768px) {
+  .about-section {
+    max-width: 70vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-section {
+    max-width: 40vw; /* Your original desktop size */
+  }
+}
+
+/* ======== SECTION STYLES ======== */
 .about-section,
 .skills-section,
 .projects-section,
@@ -58,55 +180,90 @@ text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
 
 
-
-.section-title {
-  font-size: var(--text-size-lg);
-  font-weight: 700;
-  margin: 1.5rem;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-  
-}
-.section-content {
-  font-size: var(--text-size-md);
-  max-width: 20vw;
-  margin: 3rem 1.5rem;
-  padding: 2rem;
-  border-style: solid;
-  border-width: 2px;
-}
-.section-subtitle {
-  font-size: var(--text-size-md);
-  opacity: 0.9;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* Smooth scrolling for the sections container */
-.scroll-sections {
-  scroll-behavior: smooth;
-}
-
 /* ===== SKILLS GRID ===== */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    align-items: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-sm);
+  align-items: start;
+  width: 100%;
 }
+
+/* Skills Grid Responsive */
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-xs);
+  }
+}
+
+@media (min-width: 1024px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-md);
+  }
+}
+
 .skill {
-    background: rgba(255,255,255,0.02);
-    border-radius: 10px;
-    padding: 0.6rem;
-    display:flex;
-    gap: 0.6rem;
-    align-items: center;
-    transition: transform 250ms ease, box-shadow 250ms ease;
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+  padding: var(--space-xs);
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  transition: transform 250ms ease, box-shadow 250ms ease;
 }
-.skill img { width: 48px; height: 48px; object-fit: contain; }
-.skill-info h4 { margin: 0; font-size: 1rem; }
-.skill-info small { color: rgba(255,255,255,0.8); }
-.skill:hover { transform: translateY(-6px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+
+.skill img { 
+  width: 40px; 
+  height: 40px; 
+  object-fit: contain; 
+}
+
+/* Skill Icon Responsive */
+@media (min-width: 768px) {
+  .skill img { 
+    width: 48px; 
+    height: 48px; 
+  }
+}
+
+.skill-info h4 { 
+  margin: 0; 
+  font-size: var(--text-sm); 
+}
+
+.skill-info small { 
+  color: rgba(255,255,255,0.8); 
+  font-size: var(--text-xs);
+}
+
+.skill:hover { 
+  transform: translateY(-6px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35); 
+}
 
 .skills-content {
   border-width: 0px;
+  max-width: 90vw; /* Mobile first */
 }
+
+@media (min-width: 768px) {
+  .skills-content {
+    max-width: 80vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skills-content {
+    max-width: 70vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  .skills-content {
+    max-width: 60vw;
+  }
+}
+
 
