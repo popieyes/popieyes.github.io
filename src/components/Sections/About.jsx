@@ -23,7 +23,8 @@ export default function About({ onSectionEnter }) {
             <motion.h2 
               className="section-title"
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x:0}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.8 }}
             >
               About Me
@@ -31,14 +32,16 @@ export default function About({ onSectionEnter }) {
             <div className='section-content'>
              <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               <b>Graphics Programmer currently working in the research team MSLab in Rey Juan Carlos University.</b>
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               Primarily, I enjoy myself working on gameplay architecture that enhance both users' and designers' experience in video games. 
@@ -46,7 +49,8 @@ export default function About({ onSectionEnter }) {
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               In my work as a research assistant, 
@@ -56,7 +60,8 @@ export default function About({ onSectionEnter }) {
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               As of my free time, I like participating in game jams,  
@@ -65,7 +70,17 @@ export default function About({ onSectionEnter }) {
               travelling, going to the club...
               And the list goes on!
             </motion.p>
+           
             </div>
+            {/*  <motion.button 
+              className=""
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1}}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.8 }}
+            >
+              Let's Connect!
+            </motion.button> */}
           </div>
         </div>
       </div>

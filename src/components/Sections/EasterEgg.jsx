@@ -23,18 +23,20 @@ export default function About({ onSectionEnter }) {
             <motion.h2 
               className="section-title"
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x:0}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.8 }}
             >
-              Easter Egg
+              Huh?
             </motion.h2>
             <div className='section-content'>
              <motion.p
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              whileInView={{ opacity: 1}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <b>You found me!</b>
+              <b>Hello little friend. What are you doing here?</b>
             </motion.p>
         
             </div>

@@ -24,11 +24,21 @@ export default function Skills({ onSectionEnter }) {
             <motion.h2 
               className="section-title"
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x:0}}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.8 }}
             >
               Skills
             </motion.h2>
+            <motion.p
+              className='section-subtitle'
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1}}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              Work in progress. Come back soon...
+            </motion.p>
             <div className='section-content skills-content'>
             <div className="skills-grid">
                         <div className="skill">
@@ -59,13 +69,13 @@ export default function Skills({ onSectionEnter }) {
                                 <small>Engine experience & gameplay systems</small>
                             </div>
                         </div>
-                        <div className="skill">
+                        {/* <div className="skill">
                             <img src="images/tech-unreal.png" alt="Unreal"/>
                             <div className="skill-info">
                                 <h4>Unreal</h4>
                                 <small>Rendering and real-time pipelines</small>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="skill">
                             <img src="images/tech-opengl.png" alt="Graphics"/>
                             <div className="skill-info">

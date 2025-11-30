@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { easing } from 'maath'
 
 import { Scene } from './components/Scene'
-import { EffectComposer, Bloom, DepthOfField } from '@react-three/postprocessing'
+
+
 import LandingPage from './components/Sections/LandingPage'
 import Hero from './components/Sections/Hero'
 import About from './components/Sections/About'
@@ -13,18 +14,19 @@ import Contact from './components/Sections/Contact'
 import SectionWheelHandler from './components/SectionWheelHandler'
 import EasterEgg from './components/Sections/EasterEgg'
 import { ScrollProvider,useScroll } from './hooks/useScrollContext'
+import { Bvh } from '@react-three/drei'
 
 function AppContent() {
   const { currentSection, setCurrentSection } = useScroll()
 
   const sectionCameras = {
     landing: { position: [2, 2, 0], lookAt: [0, 1.5, 0] },
-    hero: { position: [0, 1, -0.05], lookAt: [-.35, 0.9, -0.06] },
+    hero: { position: [0, 1, -0.05], lookAt: [-.40, 0.9, -0.06] },
     about: { position: [-0.15, 1, 0], lookAt: [-0.6, 0, 0] },
     projects: { position: [0.5, 1.3, 1.5], lookAt: [-.5, 1.3, 1.1] },
     skills: { position: [0.5, 1.25, -0.5], lookAt: [-2, 1, 0] },
     contact: { position: [0, 1, 1], lookAt: [-2, 0, 0] },
-    easter: { position: [0, 0, 1], lookAt: [-2, 0, 0] }
+    easter: { position: [0.5, 0.6, 0.8], lookAt: [-0.8, 0.3, 0.5] }
   }
 
   const handleGetStarted = () => {
@@ -36,7 +38,7 @@ function AppContent() {
     setCurrentSection(section)
   }
   
-  
+
   return (
       <div style={{ height: '100vh', position: 'relative' }}>
         {/* 3D Scene */}
@@ -52,17 +54,14 @@ function AppContent() {
             zIndex: 0 
           }}
         >
-          
+      
+       
           <Scene 
             currentSection={currentSection}
             sectionCameras={sectionCameras}
           />
 
-          {/* Postprocessing */}
-        <EffectComposer disableNormalPass>
-          <Bloom luminanceThreshold={0} mipmapBlur luminanceSmoothing={0.0} intensity={0.5} />
-          {/* <DepthOfField  focalLength={1} bokehScale={0.2} height={700} /> */}
-        </EffectComposer>
+      
        {/* Camera movements */}
         </Canvas>
 
