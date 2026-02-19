@@ -7,7 +7,7 @@ export function Office(){
             <Gltf 
             castShadow 
             receiveShadow 
-            src={process.env.PUBLIC_URL + "/models/office-mod.glb"} 
+            src={"/Path3D/models/office-mod.glb"} 
             position={[-0.5, 0, -1.2]} />
            
             <Gltf 
