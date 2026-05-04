@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Special+Elite&display=swap');
+@import "tailwindcss";
+
 
 body {
   margin: 0;
@@ -8,6 +10,8 @@ body {
   background-color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(/images/bgXl.jpg);
+  background-repeat: repeat-y;
 }
 
 code {

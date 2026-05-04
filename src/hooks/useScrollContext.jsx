@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react'
 const ScrollContext = createContext()
 
 export const ScrollProvider = ({ children }) => {
-  const [currentSection, setCurrentSection] = useState('landing')
+  const [currentSection, setCurrentSection] = useState('hero')
 
   const value = {
     currentSection,

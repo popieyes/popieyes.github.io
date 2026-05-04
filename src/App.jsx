@@ -15,10 +15,12 @@ import SectionWheelHandler from './components/SectionWheelHandler'
 import EasterEgg from './components/Sections/EasterEgg'
 import { ScrollProvider,useScroll } from './hooks/useScrollContext'
 import { Bvh } from '@react-three/drei'
+import ProjectPage from './components/Sections/ProjectPage'
+import { AppProvider, useAppContext } from './AppContext'
 
 function AppContent() {
   const { currentSection, setCurrentSection } = useScroll()
-
+  const {projectPageVisibility} = useAppContext();
   const sectionCameras = {
     landing: { position: [2, 2, 0], lookAt: [0, 1.5, 0] },
     hero: { position: [0, 1, -0.05], lookAt: [-.40, 0.9, -0.06] },
@@ -29,6 +31,7 @@ function AppContent() {
     easter: { position: [0.5, 0.6, 0.8], lookAt: [-0.8, 0.3, 0.5] }
   }
 
+ 
   const handleGetStarted = () => {
     // Animate camera to hero view
     setCurrentSection('hero')
@@ -40,42 +43,15 @@ function AppContent() {
   
 
   return (
-      <div style={{ height: '100vh', position: 'relative' }}>
+      <div>
         {/* 3D Scene */}
-        <Canvas
-          shadows
-          camera={{ position: sectionCameras[currentSection].position, fov: 50 }}
-          style={{ 
-            position: 'fixed', 
-            top: 0, 
-            left: 0, 
-            width: '100%', 
-            height: '100%',
-            zIndex: 0 
-          }}
-        >
-      
-       
-          <Scene 
-            currentSection={currentSection}
-            sectionCameras={sectionCameras}
-          />
-
-      
        {/* Camera movements */}
-        </Canvas>
 
         {/* UI Overlays */}
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          {currentSection === 'landing' && (
-            <LandingPage onGetStarted={handleGetStarted} />
-          )}
-          
-          {currentSection !== 'landing' && (
-            <div className="scroll-sections">
-              <Hero
-                onSectionEnter={() => handleSectionEnter('hero')} 
-              />
+        <div className="scroll-sections">
+          <Hero
+            onSectionEnter={() => handleSectionEnter('hero')} 
+          />
               
               <About
                 onSectionEnter={() => handleSectionEnter('about')} 
@@ -97,18 +73,21 @@ function AppContent() {
                 onSectionEnter={() => handleSectionEnter('easter')}
               />
             </div>
-          )}
+          
 
-        </div>
-         <SectionWheelHandler />
+         {/* <SectionWheelHandler /> */}
       </div>
   )
 }
 
 function App() {
+  
+  
   return (
     <ScrollProvider>
+    <AppProvider>
       <AppContent/>
+    </AppProvider>
     </ScrollProvider>
   )
 }
