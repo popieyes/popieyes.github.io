@@ -3,6 +3,13 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
+  theme: {
+    extend: {
+      fontFamily: {
+        ink: ['BadInk', 'serif'],
+      },
+    }
+  },
   plugins: [react(), tailwindcss()],
   build: {
     outDir: 'build',

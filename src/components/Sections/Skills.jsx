@@ -90,7 +90,7 @@ export default function Skills({ onSectionEnter }) {
                                 <small>React Web Development & pipelines</small>
                             </div>
                         </div>
-                    </div>
+            </div>
             </div>
           </div>
         </div>
