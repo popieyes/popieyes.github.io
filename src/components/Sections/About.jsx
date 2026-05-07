@@ -198,7 +198,7 @@ const AboutAndContact = () => {
           <div className='w-[90%] flex flex-col justify-center items-center border-l-2 border-r-2'>
             {/* 1st Banner with picture and information */}
             <div className='flex flex-row gap-8 w-full p-16 pt-2 pb-4'>
-               <img className='min-w-0 max-w-l w-64 h-80 object-cover opacity-90' src='/images/_MG_2933.jpg'/>
+               <img className='min-w-0 max-w-l w-64 h-80 object-cover opacity-90' src='/images/MG_2933.jpg'/>
                <div className='flex flex-col h-full justify-center items-start p-8 pt-0 gap-4'>
                   <h4 className='font-black uppercase pb-4 border-b-2 text-4xl opacity-70'>Confidential</h4>
                   <p className='border-b uppercase w-full'><span className='font-bold opacity-70 uppercase'>Name:</span> <span className='font-mono'>Santiago Meneses Gómez</span></p>

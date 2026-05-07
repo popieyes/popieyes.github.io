@@ -71,7 +71,7 @@ const Hero = () => {
           {/* Column 1: Small Profile & Stats (Spans 3 cols on desktop) */}
           <div className="col-span-12 md:col-span-3 flex flex-col gap-4">
             <img 
-              src="/images/_MG_2938.jpg" 
+              src="/images/MG_2938.jpg" 
               alt="Profile side" 
               className="w-full aspect-[3/4] object-cover grayscale contrast-125 mix-blend-multiply" 
             />
@@ -91,7 +91,7 @@ const Hero = () => {
                <span className="rotate-90 tracking-widest text-xs font-mono text-neutral-600 uppercase whitespace-nowrap">Classified Material</span>
             </div>
             <img 
-              src="/images/_MG_2935.jpg" 
+              src="/images/MG_2935.jpg" 
               alt="Main Subject" 
               className="w-full h-full object-cover grayscale contrast-125 mix-blend-multiply" 
             />

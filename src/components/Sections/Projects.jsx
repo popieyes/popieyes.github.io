@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Pushpin from '../blocks/Pushpin';
 import { useAppContext } from '../../AppContext';
 import ProjectDetails from './ProjectDetails';
@@ -11,6 +11,7 @@ const Redaction = ({ children }) => (
 
 const ProjectsDossier = () => {
   const {projectPageVisible, setProjectPageVisibility} = useAppContext();
+  const [currentProjectDetails, setProjectDetails] = useState({});
   // Data array to keep the JSX clean and manageable
   const caseFiles = [
     {
@@ -21,7 +22,11 @@ const ProjectsDossier = () => {
       tech: "C# / Unity ",
       description: "Explore the depths of an abandoned lab, trapped among mutants and grotesque monsters shoot your way out.",
       src: "/images/projects-szero.png",
-      imgAlt: "Subject Zero gameplay capture"
+      imgAlt: "Subject Zero gameplay capture",
+      details: {
+        id: "PRJ-01",
+        src: "/images/projects-szero.png" 
+      }
     },
     {
       id: "INC-44",
@@ -31,17 +36,34 @@ const ProjectsDossier = () => {
       tech: "C# / Unity/ Netcode",
       description: "Party game for up to 4 players. Local and online multiplayer using Netcode for GameObjects. Physics calculations were handled via <Redaction>non-standard</Redaction> proprietary pipelines.",
       src: "/images/projects-ninja.png",
-      imgAlt: "Super Ninja Deathmatch gameplay"
+      imgAlt: "Super Ninja Deathmatch gameplay",
+      details: {
+        id: "PRJ-02",
+        src: "/images/projects-ninja.png" 
+      }
     },
     {
       id: "TECH-A",
       title: "OpenGl Game Engine",
-      type: "Rendering Framework",
+      type: "Engine",
       status: "IN DEVELOPMENT",
       tech: "C++ / OpenGL",
       description: "Custom game engine. Capable of processing high-poly geometry and heuristic lighting without <Redaction>system degradation</Redaction>.",
       src: "/images/opengl.png",
-      imgAlt: "OpenGL Engine showcase"
+      imgAlt: "OpenGL Engine showcase",
+      details: {
+        id: "PRJ-03",
+        src: "/images/opengl.png",
+        title: "OpenGL Game Engine",
+        classification: "DEVELOPMENT",
+        date: "10.24.2025",
+        role: "Programmer",
+        techStack: "Unity, C#, HLSL",
+        repoLink: "https://github.com/popieyes/GL_Engine",
+        overview: "Subject Zero was an isolated experiment to test heuristic lighting calculations in a confined 2D environment. The primary objective was to push Unity's default rendering pipeline beyond standard operational limits.",
+        technicalDetails: "Implementation required writing custom HLSL shaders to handle light occlusion dynamically. Memory leaks were detected early in development but were traced back to <Redaction>recursive shadow casting</Redaction> rather than the core engine loop. Performance stabilized after implementing a strict object-pooling protocol.",
+        anomalies: "During stress testing, the lighting engine began exhibiting non-deterministic behavior. Shadows appeared to <Redaction>persist for 3 frames</Redaction> after the light source was terminated. This was left in the final build as an 'unplanned feature'."
+      }
     },
     {
       id: "TECH-B",
@@ -51,20 +73,43 @@ const ProjectsDossier = () => {
       tech: "HLSL / Unity",
       description: "Shader tessellation and vertex manipulation. Creates heuristic <Redaction></Redaction> water displacement, foam and waves.",
       src: "/images/projects-waterShader.gif",
-      imgAlt: "Water flow shader visual"
+      imgAlt: "Water flow shader visual",
+      details: {
+        id: "PRJ-04",
+        src: "/images/projects-waterShader.gif" 
+      }
     },
     {
       id: "TECH-C",
       title: "Nori Render Engine",
       type: "Physically Based Rendering",
-      status: "EVALUATION",
+      status: "CLASSIFIED",
       tech: "C++ / Vulkan",
       description: "Path tracer using Nori engine. Implemented PDFs and accurate light bouncing and material properties. Tests on reflective and metallic surfaces yielding <Redaction>great results</Redaction>.",
       src: "/images/projects-nori.jpeg",
-      imgAlt: "PBR Engine spheres"
+      imgAlt: "PBR Engine spheres",
+      details: {
+        id: "PRJ-05",
+        title: "Nori Render Engine",
+        src: "/images/projects-nori.jpeg" ,
+        classification: "CONTAINED",
+        date: "10.24.2025",
+        role: "Programmer",
+        techStack: "Unity, C#, HLSL",
+        repoLink: "",
+        overview: "Subject Zero was an isolated experiment to test heuristic lighting calculations in a confined 2D environment. The primary objective was to push Unity's default rendering pipeline beyond standard operational limits.",
+        technicalDetails: "Implementation required writing custom HLSL shaders to handle light occlusion dynamically. Memory leaks were detected early in development but were traced back to <Redaction>recursive shadow casting</Redaction> rather than the core engine loop. Performance stabilized after implementing a strict object-pooling protocol.",
+        anomalies: "During stress testing, the lighting engine began exhibiting non-deterministic behavior. Shadows appeared to <Redaction>persist for 3 frames</Redaction> after the light source was terminated. This was left in the final build as an 'unplanned feature'."
+        
+        
+      }
     }
   ];
 
+  const handleProjectOpen = (project) => {
+    setProjectPageVisibility(true);
+    setProjectDetails(project);
+  };
   return (
     // Outer environment (matches the Hero section)
     <section id="projects" className="w-full flex justify-center items-start p-4 md:p-12 font-sans relative">
@@ -89,7 +134,7 @@ const ProjectsDossier = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-neutral-400">
           
           {caseFiles.map((item) => (
-            <div key={item.id} onClick={() => setProjectPageVisibility(true)}  className="border-r border-b border-neutral-400 p-4 flex flex-col group hover:bg-neutral-200 transition-colors duration-300 cursor-pointer">
+            <div key={item.id} onClick={() => handleProjectOpen(item.details)}  className="border-r border-b border-neutral-400 p-4 flex flex-col group hover:bg-neutral-200 transition-colors duration-300 cursor-pointer">
               
               {/* Card Header */}
               <div className="flex justify-between items-start mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
@@ -144,7 +189,7 @@ const ProjectsDossier = () => {
         </div>
         
       </div>
-       {projectPageVisible && (<ProjectDetails/>)}
+       {projectPageVisible && (<ProjectDetails projectData={currentProjectDetails}/>)}
     </section>
   );
 };

@@ -14,6 +14,7 @@ const ProjectDetails = ({
   projectData = {
     id: "AWE-01",
     title: "Subject Zero",
+    src: "/images/projects-szero.png",
     classification: "CONTAINED",
     date: "10.24.2025",
     role: "Lead Graphics Engineer",
@@ -70,7 +71,7 @@ const ProjectDetails = ({
                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-neutral-800 z-10"></div>
                <div className="bg-neutral-300 p-1 border border-neutral-400">
                  <img 
-                   src="/images/projects-szero.png" // Replace with actual project image
+                   src={projectData.src}// Replace with actual project image
                    alt="Incident Evidence" 
                    className="w-full aspect-video object-cover  contrast-125 mix-blend-multiply" 
                  />
