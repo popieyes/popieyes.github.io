@@ -7,7 +7,7 @@ export function Office(){
             <Gltf 
             castShadow 
             receiveShadow 
-            src="/models/office-mod.glb" 
+            src={"/models/office-mod.glb"} 
             position={[-0.5, 0, -1.2]} />
            
             <Gltf 
