@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from '../../AppContext';
 
 // Reusable Redaction component
@@ -14,7 +14,7 @@ const ProjectDetails = ({
   projectData = {
     id: "AWE-01",
     title: "Subject Zero",
-    src: "/images/projects-szero.png",
+    src: ["/images/projects-szero.png"],
     classification: "CONTAINED",
     date: "10.24.2025",
     role: "Lead Graphics Engineer",
@@ -26,6 +26,15 @@ const ProjectDetails = ({
   } 
 }) => {
   const {projectPageVisibility, setProjectPageVisibility} = useAppContext();
+  const [currentPic, setCurrentPicture] = useState(0);
+
+  const handlePictureChange = (value) => 
+  {
+    let pictureIndex = Math.max(Math.min(currentPic + value, projectData.src.length), 0);
+    console.log(`Current picture index is: ${pictureIndex}, sources are: ${projectData.src} and current source would be: ${projectData.src[pictureIndex]}` )
+    setCurrentPicture(pictureIndex);
+  };
+
   return (
     <div className="fixed top-0 left-0 bg-neutral-900/80  w-full min-h-screen flex  overflow-y-auto justify-center items-start p-4 md:p-12 font-sans z-30">
       
@@ -71,10 +80,18 @@ const ProjectDetails = ({
                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-neutral-800 z-10"></div>
                <div className="bg-neutral-300 p-1 border border-neutral-400">
                  <img 
-                   src={projectData.src}// Replace with actual project image
+                   src={projectData.src[currentPic]}
                    alt="Incident Evidence" 
                    className="w-full aspect-video object-cover  contrast-125 mix-blend-multiply" 
                  />
+               </div>
+               <div className='absolute top-1/2 w-full '>
+                {currentPic > 0 && (<button className='absolute left-0 rounded-full bg-neutral-700 text-white size-4 flex items-center p-3 justify-center hover:bg-neutral-400 ml-2' onClick={() => handlePictureChange(-1)}>
+                  <i className='fa fa-arrow-left'></i>
+                </button>)}
+                {currentPic < (projectData.src.length - 1) && (<button className='absolute right-0 rounded-full bg-neutral-700 text-white size-4 flex items-center justify-center p-3 hover:bg-neutral-400 mr-2' onClick={() => handlePictureChange(1)}>
+                  <i className='fa fa-arrow-right'></i>
+                </button>)}
                </div>
                <p className="text-[10px] font-mono uppercase text-neutral-500 mt-2 text-right">Fig 1. Captured visual output.</p>
             </div>
@@ -133,19 +150,19 @@ const ProjectDetails = ({
             <div className="lg:col-span-10 space-y-8">
               
               <section>
-                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-neutral-500">1. Operational Overview</h3>
+                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-neutral-500">Overview</h3>
                 <p>{projectData.overview}</p>
               </section>
 
-              <section>
-                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-neutral-500">2. Technical Execution</h3>
+              {projectData.technicalDetails && (<section>
+                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-neutral-500">Technical Execution</h3>
                 <p dangerouslySetInnerHTML={{ __html: projectData.technicalDetails }}></p>
-              </section>
+              </section>)}
 
-              <section className="bg-neutral-200 p-4 border border-neutral-400 border-l-4 border-l-red-800">
-                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-red-900">3. Observed Anomalies</h3>
+              {projectData.anomalies && (<section className="bg-neutral-200 p-4 border border-neutral-400 border-l-4 border-l-red-800">
+                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-red-900"> Observetions</h3>
                 <p dangerouslySetInnerHTML={{ __html: projectData.anomalies }}></p>
-              </section>
+              </section>)}
 
             </div>
           </div>

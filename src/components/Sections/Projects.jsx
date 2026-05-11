@@ -25,7 +25,15 @@ const ProjectsDossier = () => {
       imgAlt: "Subject Zero gameplay capture",
       details: {
         id: "PRJ-01",
-        src: "/images/projects-szero.png" 
+        src: ["/images/szero/zero2-mainmenu.png","/images/szero/zero2-options.png","/images/szero/zero2-skills.png","/images/szero/zero2-game.png",
+          "/images/szero/zero2-game2.png","/images/szero/zero2-game3.png"],
+        title: "Subject Zero",
+        classification: "CONTAINED",
+        date: "01.01.1990",
+        role: "Programmer",
+        techStack: "Unity, C#",
+        overview: `You are an adventurer exploring the depths of an abandoned lab where all sorts of mutant creatures escaped and are roaming each floor. In the darkest room of the lab, Subject Zero has awaken and it is on an unstoppable path to eliminate you, yours is the decision to whether try to take him on or navigate the lab,
+        obtain more equipment, level up until you are strong enough to defeat him in this roguelike survival horror game.`,
       }
     },
     {
@@ -39,7 +47,13 @@ const ProjectsDossier = () => {
       imgAlt: "Super Ninja Deathmatch gameplay",
       details: {
         id: "PRJ-02",
-        src: "/images/projects-ninja.png" 
+        src: ["/images/ninja/ninja-home.png","/images/ninja/ninja-select.png","/images/ninja/ninja-tut.png","/images/ninja/ninja-tut-2.png","/images/ninja/ninja-itch-1.png","/images/ninja/ninja-itch-2.png"],
+        title: "Super Ninja Deathmatch",
+        classification: "CONTAINED",
+        date: "01.01.1990",
+        role: "Gameplay Programmer",
+        techStack: "Unity, C#, Netcode",
+        overview: `Small little casual party game for up to 4 players, supporting both local and online multiplayer connecting through Unity services. You play as a ninja in a frenetic gameplay where you can throw shurikens, dash to kill enemies and clash in epic sword fights against bots or your friends.`
       }
     },
     {
@@ -49,20 +63,21 @@ const ProjectsDossier = () => {
       status: "IN DEVELOPMENT",
       tech: "C++ / OpenGL",
       description: "Custom game engine. Capable of processing high-poly geometry and heuristic lighting without <Redaction>system degradation</Redaction>.",
-      src: "/images/opengl.png",
+      src: "/images/gl/gl-5.png",
       imgAlt: "OpenGL Engine showcase",
       details: {
         id: "PRJ-03",
-        src: "/images/opengl.png",
+        src: ["/images/opengl.png", "/images/gl/gl-3.png", "/images/gl/gl-4.png","/images/gl/gl-5.png"],
         title: "OpenGL Game Engine",
         classification: "DEVELOPMENT",
-        date: "10.24.2025",
+        date: "28.02.2026",
         role: "Programmer",
-        techStack: "Unity, C#, HLSL",
+        techStack: "C++, OpenGL, GLSL",
         repoLink: "https://github.com/popieyes/GL_Engine",
-        overview: "Subject Zero was an isolated experiment to test heuristic lighting calculations in a confined 2D environment. The primary objective was to push Unity's default rendering pipeline beyond standard operational limits.",
-        technicalDetails: "Implementation required writing custom HLSL shaders to handle light occlusion dynamically. Memory leaks were detected early in development but were traced back to <Redaction>recursive shadow casting</Redaction> rather than the core engine loop. Performance stabilized after implementing a strict object-pooling protocol.",
-        anomalies: "During stress testing, the lighting engine began exhibiting non-deterministic behavior. Shadows appeared to <Redaction>persist for 3 frames</Redaction> after the light source was terminated. This was left in the final build as an 'unplanned feature'."
+        overview: `At university, I worked on several projects based on OpenGL, however, I never felt at the end that I had a complete grasp on the theory and usage of OpenGL, so I decided to start one from scratch.
+                  Building it myself from the ground was the best decision, since I finally understood the decision behind every line and the layout of the code. Most importantly, it was mine to explore and create.`,
+        technicalDetails: "The design is meant to be decoupled, separating the actual engine from the editor, so in the future I can change and explore other options, such as Vulkan or DirectX and implement them directly by just swapping them.",
+        anomalies: "This project is meant to be an open one where I constantly iterate it, making games on it while improving the engine to make more quality projects."
       }
     },
     {
@@ -76,7 +91,13 @@ const ProjectsDossier = () => {
       imgAlt: "Water flow shader visual",
       details: {
         id: "PRJ-04",
-        src: "/images/projects-waterShader.gif" 
+        src: ["/images/projects-waterShader.gif"],
+        title: "Water Toon Shader",
+        classification: "CLASSIFIED",
+        date: "Unknown",
+        role: "Shaders Programmer",
+        techStack: "Unity, HLSL",
+        overview: `Simple water shader with a toon look made following a tutorial from Roystan. Implemented thoroughly all features to give the most polished look to the scene as possible, creating the foam, wave movement and floating objects on the water.`
       }
     },
     {
@@ -91,15 +112,15 @@ const ProjectsDossier = () => {
       details: {
         id: "PRJ-05",
         title: "Nori Render Engine",
-        src: "/images/projects-nori.jpeg" ,
+        src: ["/images/projects-nori.jpeg"] ,
         classification: "CONTAINED",
         date: "10.24.2025",
         role: "Programmer",
-        techStack: "Unity, C#, HLSL",
+        techStack: "C++, Nori",
         repoLink: "",
-        overview: "Subject Zero was an isolated experiment to test heuristic lighting calculations in a confined 2D environment. The primary objective was to push Unity's default rendering pipeline beyond standard operational limits.",
-        technicalDetails: "Implementation required writing custom HLSL shaders to handle light occlusion dynamically. Memory leaks were detected early in development but were traced back to <Redaction>recursive shadow casting</Redaction> rather than the core engine loop. Performance stabilized after implementing a strict object-pooling protocol.",
-        anomalies: "During stress testing, the lighting engine began exhibiting non-deterministic behavior. Shadows appeared to <Redaction>persist for 3 frames</Redaction> after the light source was terminated. This was left in the final build as an 'unplanned feature'."
+        overview: "Worked on a path tracer engine, implementing the path tracing from the ground up, building the PDFs and ray interactions with materials, finally being able to render realistic scenes with different type of simulated materials.",
+        technicalDetails: "",
+        anomalies: ""
         
         
       }
