@@ -15,6 +15,32 @@ const ProjectsDossier = () => {
   // Data array to keep the JSX clean and manageable
   const caseFiles = [
     {
+      id: "TECH-A",
+      title: "Hernan Game Engine",
+      type: "Engine",
+      status: "IN DEVELOPMENT",
+      tech: "C++ / OpenGL / Vulkan",
+      description: "Custom game engine. Capable of processing high-poly geometry and heuristic lighting.",
+      src: "/images/gl/gl-5.png",
+      imgAlt: "OpenGL Engine showcase",
+      details: {
+        id: "PRJ-03",
+        src: ["/images/opengl.png", "/images/gl/gl-3.png", "/images/gl/gl-4.png","/images/gl/gl-5.png"],
+        title: "OpenGL Game Engine",
+        classification: "DEVELOPMENT",
+        date: "28.02.2026",
+        role: "Engine Programmer",
+        techStack: "C++, OpenGL, Vulkan, GLSL, Slang",
+        repoLink: "https://github.com/popieyes/GL_Engine",
+        overview: `At university, I worked on several projects based on OpenGL, however, I never felt at the end that I had a complete grasp on the theory and usage of OpenGL, so I decided to start one from scratch.
+                  Building it myself from the ground was the best decision, since I finally understood the decision behind every line and the layout of the code. Most importantly, it was mine to explore and create.`,
+        technicalDetails: `The design is meant to be decoupled, separating the actual engine from the editor, so in the future I can change and explore other options, such as Vulkan or DirectX and implement them directly by just swapping them. </br>
+                          UPDATE (24.05.26): Vulkan implementation. CMake configuration file architectured to hold different libraries containing relevant files and packages (Core, Vulkan, OpenGL). Configuration for Vulkan rendering started keeping a
+                          modular and swappable architecture. `,
+        anomalies: "This project is meant to be an open one where I constantly iterate it, making games on it while improving the engine to make more quality projects."
+      }
+    },
+    {
       id: "AWE-01",
       title: "Subject Zero",
       type: "2D Survival Horror",
@@ -56,30 +82,7 @@ const ProjectsDossier = () => {
         overview: `Small little casual party game for up to 4 players, supporting both local and online multiplayer connecting through Unity services. You play as a ninja in a frenetic gameplay where you can throw shurikens, dash to kill enemies and clash in epic sword fights against bots or your friends.`
       }
     },
-    {
-      id: "TECH-A",
-      title: "OpenGl Game Engine",
-      type: "Engine",
-      status: "IN DEVELOPMENT",
-      tech: "C++ / OpenGL",
-      description: "Custom game engine. Capable of processing high-poly geometry and heuristic lighting without <Redaction>system degradation</Redaction>.",
-      src: "/images/gl/gl-5.png",
-      imgAlt: "OpenGL Engine showcase",
-      details: {
-        id: "PRJ-03",
-        src: ["/images/opengl.png", "/images/gl/gl-3.png", "/images/gl/gl-4.png","/images/gl/gl-5.png"],
-        title: "OpenGL Game Engine",
-        classification: "DEVELOPMENT",
-        date: "28.02.2026",
-        role: "Programmer",
-        techStack: "C++, OpenGL, GLSL",
-        repoLink: "https://github.com/popieyes/GL_Engine",
-        overview: `At university, I worked on several projects based on OpenGL, however, I never felt at the end that I had a complete grasp on the theory and usage of OpenGL, so I decided to start one from scratch.
-                  Building it myself from the ground was the best decision, since I finally understood the decision behind every line and the layout of the code. Most importantly, it was mine to explore and create.`,
-        technicalDetails: "The design is meant to be decoupled, separating the actual engine from the editor, so in the future I can change and explore other options, such as Vulkan or DirectX and implement them directly by just swapping them.",
-        anomalies: "This project is meant to be an open one where I constantly iterate it, making games on it while improving the engine to make more quality projects."
-      }
-    },
+    
     {
       id: "TECH-B",
       title: "Water Toon Shader",

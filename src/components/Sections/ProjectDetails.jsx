@@ -160,7 +160,7 @@ const ProjectDetails = ({
               </section>)}
 
               {projectData.anomalies && (<section className="bg-neutral-200 p-4 border border-neutral-400 border-l-4 border-l-red-800">
-                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-red-900"> Observetions</h3>
+                <h3 className="text-xs tracking-widest uppercase font-sans font-bold mb-2 text-red-900"> Observations</h3>
                 <p dangerouslySetInnerHTML={{ __html: projectData.anomalies }}></p>
               </section>)}
 
