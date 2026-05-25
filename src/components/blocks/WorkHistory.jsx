@@ -11,20 +11,12 @@ const CompressedWorkHistory = () => {
   // Mock data (condensed notes for tighter fit)
   const deployments = [
     {
-      id: "DEP-004",
-      date: "04.25 - PRES",
+      id: "DEP-003",
+      date: "07.25 - 02.26",
       status: "ACTIVE",
       role: "Assistant Research Engineer",
       facility: "MSLab - Rey Juan Carlos University",
-      notes: "Directing research on heuristic lighting models. Constant maintenance required to prevent <Redaction>vertex explosions</Redaction>."
-    },
-    {
-      id: "DEP-003",
-      date: "07.25 - 02.26",
-      status: "ARCHIVED",
-      role: "Assistant Research Engineer",
-      facility: "MSLab - Rey Juan Carlos University",
-      notes: "Rewrote network interpolation logic post-<Redaction>desync incident</Redaction>. Codebase quarantined."
+      notes: "Researching on solutions for 3D scenes vectorization to .SVG files and developing tools for front-end and back-end cloth simulation in a custom React/Three.js powered engine."
     },
     {
       id: "DEP-002",

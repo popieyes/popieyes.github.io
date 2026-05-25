@@ -12,11 +12,11 @@ const Redaction = ({ children }) => (
 
 const AboutAndContact = () => {
   return (
-    <section id="about" className="w-full p-4 md:p-12 font-sans relative bg-[url(/images/folderText.png)] bg-cover bg-repeat-x overflow-hidden">
+    <section id="about" className="w-full p-4 md:p-12 font-sans relative bg-[url(/images/folderText.webp)] bg-cover bg-repeat-x overflow-hidden">
       {/* Paper texture background */}
-      <div className='w-full flex justify-center items-start p-4 md:p-12 bg-[url(/images/heather-green-1GuZ9y1qAT8-unsplash.jpg)] bg-cover bg-no-repeat'>
+      <div className='w-full flex justify-center items-start p-4 md:p-12 bg-[url(/images/heather-green-1GuZ9y1qAT8-unsplash.webp)] bg-cover bg-no-repeat'>
       {/* Main Dossier Container */}
-        <div className="absolute invisible 2xl:visible w-full max-w-5xl left-1/2 -translate-x-full -ml-200 bg-[#e8e6df] text-neutral-900 shadow-2xl z-20 border border-neutral-300 blur-[2px]">
+        <div className="absolute invisible 2xl:visible w-full max-w-5xl left-1/2 -translate-x-full -ml-200 bg-[#e8e6df] text-neutral-900 shadow-2xl z-20 border border-neutral-300 blur-[4px]">
         <Pushpin color='red' className={"absolute top-2 left-1/2 -translate-x-1/2 z-10 size-2 lg:size-10 lg:top-3 "}/>
           {/* =========================================
               ABOUT ME: FIELD EVALUATION
@@ -198,7 +198,7 @@ const AboutAndContact = () => {
           <div className='w-[90%] flex flex-col justify-center items-center border-l-2 border-r-2'>
             {/* 1st Banner with picture and information */}
             <div className='flex flex-row gap-8 w-full p-16 pt-2 pb-4'>
-               <img className='min-w-0 max-w-l w-64 h-80 object-cover opacity-90' src='/images/MG_2933.jpg'/>
+               <img className='min-w-0 max-w-l w-64 h-80 object-cover opacity-90' src='/images/MG_2933.webp'/>
                <div className='flex flex-col h-full justify-center items-start p-8 pt-0 gap-4'>
                   <h4 className='font-black uppercase pb-4 border-b-2 text-4xl opacity-70'>Confidential</h4>
                   <p className='border-b uppercase w-full'><span className='font-bold opacity-70 uppercase'>Name:</span> <span className='font-mono'>Santiago Meneses Gómez</span></p>
@@ -231,12 +231,12 @@ const AboutAndContact = () => {
               <div className='flex flex-col items-center justify-center gap-2'>
                 <h4 className='text-4xl font-black uppercase opacity-70'>Tech Stack</h4>
                 <div className='grid grid-cols-3 p-4 gap-8'>
-                  <Skill src='images/tech-cpp.png' alt='C++' techName='C++' small='Systems and engine-level programming'/>
+                  <Skill src='images/tech-cpp.png' alt='C++' techName='C++' small='Engine-level programming'/>
                   <Skill src='images/tech-csharp.png' alt='C#' techName='C#' small='Gameplay scripting and tools'/>
-                  <Skill src='images/tech-python.png' alt='Python' techName='Python' small='Prototyping and tooling'/>
+                  <Skill src='images/tech-python.png' alt='Python' techName='Python' small='Simulation pipelines'/>
                   <Skill src='images/tech-unity.png' alt='Unity' techName='Unity' small='Engine experience & gameplay systems'/>
-                  <Skill src='images/tech-opengl.png' alt='Graphics' techName='Graphics APIs' small='OpenGL / Vulkan / DirectX'/>
-                  <Skill src='images/tech-ts.png' alt='TypeScript' techName='TypeScript' small='React Web Development & pipelines'/>
+                  <Skill src='images/tech-opengl.png' alt='Graphics' techName='Graphics APIs' small='OpenGL / Vulkan'/>
+                  <Skill src='images/tech-ts.png' alt='TypeScript' techName='TypeScript' small='Front End Development (React) & tools'/>
                 </div>
               </div>
               <div className='flex flex-col justify-center items-center gap-2'>
@@ -249,7 +249,7 @@ const AboutAndContact = () => {
           </div>
         </div>
       {/* Additional Papers Container */}
-      <div className='absolute right-1/2 translate-x-full -mr-200 w-full max-w-5xl  blur-[2px]'>
+      <div className='absolute right-1/2 translate-x-full -mr-200 w-full max-w-5xl  blur-[4px]'>
         <div className='relative invisible 2xl:visible '>
           <div className="relative w-full max-w-5xl bg-[#e8e6df] text-neutral-900 shadow-lg/100 z-20 border border-neutral-300">
             <Pushpin color='red' className={"absolute top-2 left-1/2 -translate-x-1/2 z-10 size-2 lg:size-10 lg:top-3 "}/>

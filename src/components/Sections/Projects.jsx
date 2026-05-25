@@ -145,7 +145,7 @@ const ProjectsDossier = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b-4 border-neutral-900 pb-2 mb-8 mt-4">
           <div>
             <p className="text-xs tracking-widest uppercase font-mono text-neutral-600 mb-1">Appendix C</p>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase">Incident Log</h2>
+            <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase">Projects</h2>
           </div>
           <div className="text-right text-xs tracking-widest uppercase font-mono mt-4 md:mt-0 bg-neutral-200 p-2 border border-neutral-400">
             Clearance Level: Red <br />

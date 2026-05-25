@@ -13,7 +13,7 @@ body {
   background-color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 90%), url(/images/pexels-ksw-photographer-2372420-4018952.png);
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 90%), url(/images/pexels-ksw-photographer-2372420-4018952.webp);
   background-repeat: repeat;
   background-size: contain;
  

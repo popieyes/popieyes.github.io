@@ -71,7 +71,7 @@ const Hero = () => {
           {/* Column 1: Small Profile & Stats (Spans 3 cols on desktop) */}
           <div className="col-span-12 md:col-span-3 flex flex-col gap-4">
             <img 
-              src="/images/MG_2938.jpg" 
+              src="/images/profile-picture.jpg" 
               alt="Profile side" 
               className="w-full aspect-[3/4] object-cover grayscale contrast-125 mix-blend-multiply" 
             />
@@ -86,12 +86,12 @@ const Hero = () => {
           </div>
 
           {/* Column 2: Main Portrait (Spans 5 cols on desktop) */}
-          <div className="col-span-12 md:col-span-5 relative">
-            <div className="absolute top-0 right-0 bottom-0 w-8 bg-neutral-300 mix-blend-multiply border-l border-neutral-400 flex items-center justify-center writing-vertical">
+          <div className="col-span-12 md:col-span-5 relative max-h-120">
+            <div className="absolute top-0 right-0 bottom-0 w-8 bg-neutral-300 border-l border-neutral-400 flex items-center justify-center writing-vertical">
                <span className="rotate-90 tracking-widest text-xs font-mono text-neutral-600 uppercase whitespace-nowrap">Classified Material</span>
             </div>
             <img 
-              src="/images/MG_2935.jpg" 
+              src="/images/MG_2938.webp" 
               alt="Main Subject" 
               className="w-full h-full object-cover grayscale contrast-125 mix-blend-multiply" 
             />
@@ -124,14 +124,14 @@ const Hero = () => {
           <div className="col-span-12 md:col-span-8 ">
             <p className="text-xs tracking-widest uppercase font-sans font-bold mb-2">1. Overview</p>
             <p className="mb-4">
-              Subject is heavily involved in building <Redaction>highly classified</Redaction> real-time rendering engines. 
-              Current surveillance indicates ongoing research at MSLab. The subject's utilization of graphics tools has resulted in <Redaction>unprecedented performance metrics</Redaction> that our analysts are still attempting to deconstruct.
+              Highly interested in <Redaction>real-time rendering engines</Redaction>. Background in videogame development and computer graphics. Currently located in Spain. Employed as an Assistant Research Engineer at Rey Juan Carlos University.
             </p>
 
             <p className="text-xs tracking-widest uppercase font-sans font-bold mb-2 mt-6">2. Background</p>
             <p>
-              Initial contact with the industry was made in the <Redaction>Degree in Game Design and Development</Redaction>. <br/>
-              Since then, the subject has developed several videogames developed in game jams, utilizing <Redaction>Unity</Redaction> and presenting demos at game event Gamescom. Do not approach without direct authorization from the Director of Research.
+              Ever since I was kid I was fascinated with videogames, that's why I always said I wanted to be a game developer, even though at that time I did not even know if it was a real job. <br/> <br></br>
+              Heading to college, I knew that I wanted to study the degree in <Redaction>Game Design and Development</Redaction> and 
+              since then, I have been developing videogames in game jams, primarily with <Redaction>Unity</Redaction> and presenting some demos at Gamescom, later on focusing on specializing in <Redaction>Computer Graphics</Redaction>.
             </p>
           </div>
 

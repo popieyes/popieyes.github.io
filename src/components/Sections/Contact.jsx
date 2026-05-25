@@ -11,7 +11,7 @@ export default function Contact() {
           <div className="relative -top-30 w-3xl z-20 mt-8 border-t-2 border-dashed border-neutral-400 bg-neutral-200 p-6 md:p-10 shadow-lg/50">
             
             <div className="max-w-2xl mx-auto">
-              <h3 className="text-center font-sans font-black uppercase tracking-widest text-xl mb-2">Internal Requisition Form</h3>
+              <h3 className="text-center font-sans font-black uppercase tracking-widest text-xl mb-2">Contact Form</h3>
               <p className="text-center font-mono text-xs text-neutral-500 mb-10 uppercase tracking-widest">
                 Direct Transmission to Subject: Santiago <br/>
                 Network: Secure
@@ -25,7 +25,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative group">
                     <label htmlFor="auth_name" className="absolute -top-4 left-0 text-[10px] font-bold uppercase tracking-widest text-neutral-600 group-focus-within:text-neutral-900 transition-colors">
-                      Authorizing Agent (Name)
+                      Name Of Individual / Company
                     </label>
                     <input 
                       type="text" 
@@ -37,7 +37,7 @@ export default function Contact() {
 
                   <div className="relative group">
                     <label htmlFor="auth_org" className="absolute -top-4 left-0 text-[10px] font-bold uppercase tracking-widest text-neutral-600 group-focus-within:text-neutral-900 transition-colors">
-                      Department / Agency
+                      Subject
                     </label>
                     <input 
                       type="text" 
@@ -50,7 +50,7 @@ export default function Contact() {
                 {/* Message Block */}
                 <div className="relative group pt-4">
                   <label htmlFor="transmission_body" className="absolute -top-1 left-0 text-[10px] font-bold uppercase tracking-widest text-neutral-600 group-focus-within:text-neutral-900 transition-colors">
-                    Transmission Details
+                    Message
                   </label>
                   {/* 
                     Using a repeating linear gradient to create lines that look like 
@@ -79,7 +79,7 @@ export default function Contact() {
                     className="bg-neutral-900 text-[#e8e6df] px-8 py-3 font-sans font-bold uppercase tracking-widest text-sm hover:bg-neutral-800 hover:text-white transition-all active:scale-95 flex items-center gap-2"
                   >
                     <span className="w-2 h-2 bg-red-600 animate-pulse rounded-full"></span>
-                    Transmit Data
+                    SEND FORM
                   </button>
                 </div>
               </form>
