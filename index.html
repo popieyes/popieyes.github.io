@@ -2,31 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- <link rel="icon" href="" /> -->
-    <!-- Font Awesome 5.8.2 CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+
+    <title>Santiago Meneses Gómez — Graphics Programmer &amp; Research Engineer</title>
     <meta
       name="description"
-      content="Santiago Meneses Gómez Portfolio"
+      content="Graphics programmer and research engineer at MSLab, Rey Juan Carlos University. Real-time rendering, cloth simulation, and engines built from scratch."
     />
-    <!-- <link rel="apple-touch-icon" href="" /> -->
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="preload" href="/fonts/BadInk.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/fonts/Chreed-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  
-    
-    <title>Santiago Portfolio</title>
+    <link rel="canonical" href="https://popieyes.github.io/" />
+
+    <meta name="theme-color" content="#edeff1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#10151a" media="(prefers-color-scheme: dark)" />
+
+    <!-- Emoji favicon: no extra request, no 404 in the console. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◤</text></svg>"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://popieyes.github.io/" />
+    <meta property="og:title" content="Santiago Meneses Gómez — Graphics Programmer" />
+    <meta
+      property="og:description"
+      content="Real-time rendering, cloth simulation, and the pipelines underneath. Research engineer at MSLab, URJC."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script type="module" src="/src/index.jsx"></script>
     <div id="root"></div>
-  
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif; max-width: 40rem">
+        <h1>Santiago Meneses Gómez</h1>
+        <p>
+          Graphics programmer and research engineer at MSLab, Rey Juan Carlos
+          University, Madrid. I work on real-time rendering, garment simulation,
+          and engines built from scratch.
+        </p>
+        <p>
+          This portfolio needs JavaScript to run. You can reach me on
+          <a href="https://github.com/popieyes">GitHub</a>.
+        </p>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

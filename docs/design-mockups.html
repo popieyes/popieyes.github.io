@@ -1,0 +1,966 @@
+<title>Portfolio v2 — Three Modes</title>
+
+<style>
+  /* ============================================================
+     WRAPPER TOKENS — instrument panel / render inspector
+     Mockups below deliberately do NOT read these; each mode
+     carries its own fixed palette so the theme toggle can't
+     repaint a design comp.
+     ============================================================ */
+  :root {
+    --ground:  #0E1116;
+    --panel:   #151A21;
+    --panel-2: #1B212A;
+    --line:    #252C36;
+    --line-hi: #38414E;
+    --text:    #C9D1D9;
+    --muted:   #79838F;
+    --accent:  #4FB3A5;
+    --accent-dim: #2A5D57;
+    --warn:    #D98A3E;
+    --good:    #6FBF73;
+    --crit:    #D96A6A;
+
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+
+    --maxw: 1180px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ground:  #F2F1EE;
+      --panel:   #FFFFFF;
+      --panel-2: #F7F6F3;
+      --line:    #DEDBD4;
+      --line-hi: #C4C0B7;
+      --text:    #1C2126;
+      --muted:   #6E7379;
+      --accent:  #2F8C80;
+      --accent-dim: #A8D5CE;
+      --warn:    #A8681F;
+      --good:    #3F7D45;
+      --crit:    #A84A4A;
+    }
+  }
+  :root[data-theme="light"] {
+    --ground:  #F2F1EE;
+    --panel:   #FFFFFF;
+    --panel-2: #F7F6F3;
+    --line:    #DEDBD4;
+    --line-hi: #C4C0B7;
+    --text:    #1C2126;
+    --muted:   #6E7379;
+    --accent:  #2F8C80;
+    --accent-dim: #A8D5CE;
+    --warn:    #A8681F;
+    --good:    #3F7D45;
+    --crit:    #A84A4A;
+  }
+  :root[data-theme="dark"] {
+    --ground:  #0E1116;
+    --panel:   #151A21;
+    --panel-2: #1B212A;
+    --line:    #252C36;
+    --line-hi: #38414E;
+    --text:    #C9D1D9;
+    --muted:   #79838F;
+    --accent:  #4FB3A5;
+    --accent-dim: #2A5D57;
+    --warn:    #D98A3E;
+    --good:    #6FBF73;
+    --crit:    #D96A6A;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; flex-direction: column; gap: 1.25rem; }
+  .rule-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem; flex-wrap: wrap;
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted);
+    border-bottom: 1px solid var(--line); padding-bottom: .75rem;
+  }
+  .masthead h1 {
+    font-family: var(--mono);
+    font-size: clamp(1.75rem, 5.5vw, 3.1rem);
+    font-weight: 700; letter-spacing: -.03em; line-height: 1.05;
+    text-wrap: balance; margin: 0;
+  }
+  .masthead h1 em { font-style: normal; color: var(--accent); }
+  .lede {
+    max-width: 62ch; font-size: 1.02rem; color: var(--muted);
+  }
+  .lede strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- shared spine note ---------- */
+  .spine {
+    border: 1px solid var(--line); border-left: 2px solid var(--accent);
+    background: var(--panel); padding: 1.25rem 1.4rem;
+    display: flex; flex-direction: column; gap: .6rem;
+  }
+  .spine h2 {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); margin: 0; font-weight: 600;
+  }
+  .spine p { margin: 0; max-width: 70ch; font-size: .95rem; color: var(--muted); }
+  .spine code {
+    font-family: var(--mono); font-size: .85em;
+    background: var(--panel-2); border: 1px solid var(--line);
+    padding: .08em .35em; color: var(--text);
+  }
+
+  /* ---------- mode section ---------- */
+  .mode { display: flex; flex-direction: column; gap: 1.1rem; }
+
+  .mode-head { display: flex; flex-direction: column; gap: .55rem; }
+  .mode-tag {
+    display: flex; align-items: center; gap: .7rem; flex-wrap: wrap;
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .mode-num { color: var(--accent); font-weight: 700; }
+  .mode-dot { width: 4px; height: 4px; background: var(--line-hi); }
+  .mode-role { color: var(--muted); }
+  .mode-head h2 {
+    font-family: var(--mono); font-size: clamp(1.25rem, 3.4vw, 1.85rem);
+    font-weight: 700; letter-spacing: -.02em; margin: 0; text-wrap: balance;
+  }
+  .thesis { max-width: 68ch; color: var(--muted); font-size: .97rem; margin: 0; }
+
+  /* viewport frame around each comp */
+  .viewport { border: 1px solid var(--line); background: var(--panel); }
+  .vp-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding: .5rem .8rem; border-bottom: 1px solid var(--line);
+    background: var(--panel-2);
+    font-family: var(--mono); font-size: .64rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .vp-bar .dots { display: flex; gap: .3rem; }
+  .vp-bar .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line-hi); display: block; }
+  .vp-body { overflow-x: auto; }
+  .vp-body > * { min-width: 640px; }
+
+  /* notes under each comp */
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .note { background: var(--panel); padding: .9rem 1rem; display: flex; flex-direction: column; gap: .3rem; }
+  .note h4 { font-family: var(--mono); font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0; font-weight: 600; }
+  .note p { margin: 0; font-size: .87rem; color: var(--muted); line-height: 1.5; }
+
+  /* ============================================================
+     MOCKUP 01 — STANDARD. Academic, typographic, light ground.
+     ============================================================ */
+  .mock-std {
+    --p-bg: #FBFAF7; --p-ink: #16181C; --p-mut: #6A6E74;
+    --p-line: #DEDAD1; --p-acc: #1F4E46;
+    background: var(--p-bg); color: var(--p-ink);
+    font-family: var(--sans); font-size: 12px; line-height: 1.55;
+  }
+  .mock-std .std-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 26px; border-bottom: 1px solid var(--p-line);
+  }
+  .mock-std .std-mark { font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .mock-std .std-links { display: flex; gap: 18px; font-size: 11px; color: var(--p-mut); }
+  .mock-std .std-links span.on { color: var(--p-ink); }
+  .mock-std .std-switch {
+    font-family: var(--mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+    border: 1px solid var(--p-line); padding: 4px 9px; color: var(--p-mut);
+    display: flex; gap: 7px; align-items: center;
+  }
+  .mock-std .std-switch b { color: var(--p-bg); background: var(--p-acc); padding: 2px 6px; font-weight: 600; }
+
+  .mock-std .std-hero { padding: 34px 26px 26px; display: grid; grid-template-columns: 1.55fr 1fr; gap: 34px; align-items: start; border-bottom: 1px solid var(--p-line); }
+  .mock-std .std-eyebrow { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--p-acc); margin-bottom: 10px; }
+  .mock-std h1 { font-family: var(--serif); font-size: 34px; line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; font-weight: 600; text-wrap: balance; }
+  .mock-std .std-sub { font-size: 13px; color: var(--p-mut); max-width: 44ch; margin: 0 0 18px; line-height: 1.6; }
+  .mock-std .std-cta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .mock-std .std-btn { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 7px 13px; border: 1px solid var(--p-ink); }
+  .mock-std .std-btn.fill { background: var(--p-ink); color: var(--p-bg); }
+  .mock-std .std-facts { border-left: 1px solid var(--p-line); padding-left: 20px; display: flex; flex-direction: column; gap: 11px; }
+  .mock-std .std-fact { display: flex; flex-direction: column; gap: 2px; }
+  .mock-std .std-fact dt { font-family: var(--mono); font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--p-mut); }
+  .mock-std .std-fact dd { margin: 0; font-size: 11.5px; }
+
+  .mock-std .std-sec { padding: 24px 26px; border-bottom: 1px solid var(--p-line); }
+  .mock-std .std-sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+  .mock-std .std-sec-head h2 { font-family: var(--serif); font-size: 17px; margin: 0; font-weight: 600; }
+  .mock-std .std-sec-head span { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--p-mut); }
+  .mock-std .std-research { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .mock-std .std-research p { margin: 0 0 9px; font-size: 12px; color: #34383D; max-width: 52ch; }
+  .mock-std .std-research p:last-child { margin-bottom: 0; }
+
+  .mock-std .std-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .mock-std .std-card { display: flex; flex-direction: column; gap: 7px; }
+  .mock-std .std-thumb { aspect-ratio: 16/10; background: linear-gradient(135deg, #DDD8CE, #C9C3B6); border: 1px solid var(--p-line); position: relative; }
+  .mock-std .std-thumb::after { content: attr(data-l); position: absolute; bottom: 5px; left: 6px; font-family: var(--mono); font-size: 7.5px; letter-spacing: .1em; text-transform: uppercase; color: #6A6458; }
+  .mock-std .std-card h3 { font-family: var(--serif); font-size: 14px; margin: 0; font-weight: 600; }
+  .mock-std .std-card .meta { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--p-mut); }
+  .mock-std .std-card p { margin: 0; font-size: 11px; color: var(--p-mut); line-height: 1.5; }
+  .mock-std .std-stack { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
+  .mock-std .std-chip { font-family: var(--mono); font-size: 8px; letter-spacing: .06em; border: 1px solid var(--p-line); padding: 2px 5px; color: var(--p-mut); }
+
+  /* ============================================================
+     MOCKUP 02 — DOSSIER. Paper, typewriter, stamps. Cleaned up.
+     ============================================================ */
+  .mock-dos {
+    --d-paper: #E8E6DF; --d-ink: #1A1917; --d-mut: #56534C;
+    --d-line: #B5B0A3; --d-red: #8E2B24;
+    background: #2A2724; padding: 20px; font-family: var(--mono); font-size: 11px;
+    background-image: radial-gradient(circle at 30% 20%, rgba(255,255,255,.045), transparent 60%);
+  }
+  .mock-dos .dos-sheet {
+    background: var(--d-paper); color: var(--d-ink); padding: 22px 26px 26px;
+    box-shadow: 0 14px 34px rgba(0,0,0,.5); position: relative;
+  }
+  .mock-dos .dos-pin {
+    position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+    width: 15px; height: 15px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 32%, #C4433A 18%, #7C1F19 100%);
+    box-shadow: 0 2px 5px rgba(0,0,0,.5);
+  }
+  .mock-dos .dos-top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--d-line); padding-bottom: 9px; margin-bottom: 14px; font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--d-mut); }
+  .mock-dos .dos-top .r { text-align: right; color: var(--d-ink); line-height: 1.5; }
+  .mock-dos .dos-title { border-bottom: 2px solid var(--d-ink); padding-bottom: 11px; margin-bottom: 16px; }
+  .mock-dos .dos-title .lbl { font-size: 8.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--d-mut); margin-bottom: 4px; }
+  .mock-dos .dos-title h1 { font-family: var(--sans); font-size: 33px; font-weight: 900; letter-spacing: -.035em; text-transform: uppercase; margin: 0; line-height: .95; }
+  .mock-dos .dos-title .role { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--d-mut); margin-top: 6px; }
+
+  .mock-dos .dos-body { display: grid; grid-template-columns: 150px 1fr 170px; gap: 18px; }
+  .mock-dos .dos-photo { aspect-ratio: 3/4; background: linear-gradient(150deg, #9C968A, #6E6961); border: 1px solid var(--d-line); position: relative; filter: grayscale(1) contrast(1.15); }
+  .mock-dos .dos-idcard { margin-top: 8px; border-top: 1px solid var(--d-line); padding-top: 6px; display: flex; flex-direction: column; gap: 3px; font-size: 8.5px; text-transform: uppercase; }
+  .mock-dos .dos-idcard div { display: flex; justify-content: space-between; gap: 8px; }
+  .mock-dos .dos-idcard b { font-weight: 700; }
+  .mock-dos .dos-h { font-family: var(--sans); font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 6px; }
+  .mock-dos .dos-body p { margin: 0 0 9px; font-size: 10.5px; line-height: 1.65; text-align: justify; }
+  .mock-dos .redact {
+    background: var(--d-ink); color: var(--d-ink); padding: 0 3px;
+    user-select: none; border-radius: 1px;
+  }
+  .mock-dos .dos-side { display: flex; flex-direction: column; gap: 10px; }
+  .mock-dos .dos-box { border: 1px solid var(--d-line); background: rgba(0,0,0,.045); padding: 8px 9px; }
+  .mock-dos .dos-box .k { font-size: 8px; letter-spacing: .14em; text-transform: uppercase; color: var(--d-mut); border-bottom: 1px solid var(--d-line); padding-bottom: 3px; margin-bottom: 5px; }
+  .mock-dos .dos-box p { font-size: 9.5px; text-align: left; margin: 0 0 3px; }
+  .mock-dos .dos-stamp {
+    border: 2px dashed var(--d-red); color: var(--d-red); transform: rotate(-4deg);
+    padding: 5px 9px; text-align: center; font-family: var(--sans); font-weight: 900;
+    font-size: 12px; letter-spacing: .16em; text-transform: uppercase; align-self: flex-start; margin-top: 4px;
+  }
+  .mock-dos .dos-cases { margin-top: 16px; border-top: 1px solid var(--d-line); padding-top: 12px; }
+  .mock-dos .dos-caserow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--d-line); border-left: 1px solid var(--d-line); }
+  .mock-dos .dos-case { border-right: 1px solid var(--d-line); border-bottom: 1px solid var(--d-line); padding: 9px 10px; display: flex; flex-direction: column; gap: 5px; }
+  .mock-dos .dos-case .cid { display: flex; justify-content: space-between; font-size: 7.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--d-mut); }
+  .mock-dos .dos-case .cid .st { border: 1px solid var(--d-line); padding: 0 3px; }
+  .mock-dos .dos-case .cid .st.act { border-color: var(--d-red); color: var(--d-red); }
+  .mock-dos .dos-case h4 { font-family: var(--sans); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; margin: 0; line-height: 1.05; }
+  .mock-dos .dos-case .cimg { aspect-ratio: 16/9; background: linear-gradient(135deg, #B0AA9C, #85806F); border: 1px solid var(--d-line); }
+  .mock-dos .dos-case p { font-size: 9px; margin: 0; text-align: left; line-height: 1.5; }
+
+  /* ============================================================
+     MOCKUP 03 — SPATIAL. Dark viewport + HUD chrome.
+     ============================================================ */
+  .mock-spa {
+    --s-bg: #090C10; --s-hud: #C6D2DC; --s-mut: #6C7A87;
+    --s-line: #1E2833; --s-acc: #57D2C0;
+    background: var(--s-bg); color: var(--s-hud);
+    font-family: var(--mono); font-size: 11px; position: relative;
+  }
+  .mock-spa .spa-stage { position: relative; aspect-ratio: 16/8.4; overflow: hidden; }
+  .mock-spa canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .mock-spa .spa-vig { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 30%, rgba(0,0,0,.72) 100%); pointer-events: none; }
+
+  .mock-spa .hud { position: absolute; font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; }
+  .mock-spa .hud-tl { top: 12px; left: 14px; display: flex; flex-direction: column; gap: 3px; }
+  .mock-spa .hud-tl .t1 { color: var(--s-acc); font-weight: 700; }
+  .mock-spa .hud-tl .t2 { color: var(--s-mut); }
+  .mock-spa .hud-tr { top: 12px; right: 14px; text-align: right; display: flex; flex-direction: column; gap: 3px; color: var(--s-mut); font-variant-numeric: tabular-nums; }
+  .mock-spa .hud-tr b { color: var(--s-hud); font-weight: 600; }
+
+  .mock-spa .passes { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--s-line); background: rgba(9,12,16,.82); }
+  .mock-spa .passes .ph { padding: 5px 9px; font-size: 7.5px; letter-spacing: .16em; color: var(--s-mut); border-bottom: 1px solid var(--s-line); }
+  .mock-spa .passes button { display: block; width: 100%; text-align: left; background: none; border: 0; color: var(--s-mut); font: inherit; font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px; cursor: pointer; }
+  .mock-spa .passes button.on { color: var(--s-bg); background: var(--s-acc); font-weight: 700; }
+
+  .mock-spa .reticle { position: absolute; top: 41%; left: 57%; width: 54px; height: 54px; transform: translate(-50%,-50%); }
+  .mock-spa .reticle i { position: absolute; width: 9px; height: 9px; border-color: var(--s-acc); border-style: solid; border-width: 0; }
+  .mock-spa .reticle i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+  .mock-spa .reticle i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+  .mock-spa .reticle i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+  .mock-spa .reticle i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+  .mock-spa .reticle span { position: absolute; left: 62px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--s-acc); }
+
+  .mock-spa .dock { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); display: flex; gap: 6px; align-items: flex-end; }
+  .mock-spa .dock .slot { width: 62px; border: 1px solid var(--s-line); background: rgba(9,12,16,.85); padding: 4px; display: flex; flex-direction: column; gap: 4px; }
+  .mock-spa .dock .slot.on { border-color: var(--s-acc); }
+  .mock-spa .dock .slot .sh { aspect-ratio: 16/10; background: linear-gradient(140deg, #223039, #131B22); }
+  .mock-spa .dock .slot .sn { font-size: 7px; letter-spacing: .08em; text-transform: uppercase; color: var(--s-mut); text-align: center; line-height: 1.3; }
+  .mock-spa .dock .slot.on .sn { color: var(--s-acc); }
+
+  .mock-spa .exit { position: absolute; right: 14px; bottom: 12px; border: 1px solid var(--s-line); background: rgba(9,12,16,.85); padding: 5px 10px; font-size: 8px; letter-spacing: .13em; text-transform: uppercase; color: var(--s-mut); }
+  .mock-spa .perfbar { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+  .mock-spa .perfbar .lb { font-size: 7px; letter-spacing: .14em; color: var(--s-mut); }
+  .mock-spa .perfbar .track { width: 3px; height: 68px; background: var(--s-line); position: relative; }
+  .mock-spa .perfbar .track i { position: absolute; bottom: 0; left: 0; right: 0; height: 72%; background: var(--s-acc); display: block; }
+
+  /* ============================================================
+     TOGGLE DIAGRAM
+     ============================================================ */
+  .switchbar { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .sw { background: var(--panel); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .4rem; }
+  .sw.is-default { background: var(--panel-2); border-top: 2px solid var(--accent); }
+  .sw .swk { font-family: var(--mono); font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; gap: .5rem; align-items: center; }
+  .sw.is-default .swk { color: var(--accent); }
+  .sw .swn { font-family: var(--mono); font-size: 1rem; font-weight: 700; letter-spacing: -.01em; }
+  .sw p { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.5; }
+
+  /* ============================================================
+     IDEAS
+     ============================================================ */
+  .ideas { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .idea { background: var(--panel); padding: 1.15rem 1.3rem; display: grid; grid-template-columns: 2.1rem 1fr auto; gap: 1rem; align-items: start; }
+  .idea .ix { font-family: var(--mono); font-size: .78rem; color: var(--muted); font-weight: 700; padding-top: .1rem; font-variant-numeric: tabular-nums; }
+  .idea h3 { font-family: var(--mono); font-size: 1rem; margin: 0 0 .35rem; font-weight: 700; letter-spacing: -.01em; }
+  .idea p { margin: 0; font-size: .89rem; color: var(--muted); line-height: 1.55; max-width: 68ch; }
+  .idea .why { margin-top: .45rem; font-size: .85rem; color: var(--text); }
+  .idea .why b { color: var(--accent); font-weight: 600; }
+  .chips { display: flex; flex-direction: column; gap: .35rem; align-items: flex-end; }
+  .chip { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; padding: .2rem .5rem; border: 1px solid var(--line-hi); color: var(--muted); white-space: nowrap; }
+  .chip.pay-hi { border-color: var(--good); color: var(--good); }
+  .chip.pay-md { border-color: var(--warn); color: var(--warn); }
+  .chip.eff-hi { border-color: var(--crit); color: var(--crit); }
+  .idea.rec { border-left: 2px solid var(--accent); background: var(--panel-2); }
+  .idea .flag { font-family: var(--mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: .3rem; }
+
+  .verdict { border: 1px solid var(--line); border-left: 2px solid var(--warn); background: var(--panel); padding: 1.25rem 1.4rem; display: flex; flex-direction: column; gap: .6rem; }
+  .verdict h3 { font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--warn); margin: 0; font-weight: 600; }
+  .verdict p { margin: 0; font-size: .95rem; color: var(--muted); max-width: 72ch; }
+  .verdict p strong { color: var(--text); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--line); padding-top: 1.25rem; font-family: var(--mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+  @media (max-width: 720px) {
+    .idea { grid-template-columns: 1.6rem 1fr; }
+    .chips { grid-column: 2; flex-direction: row; align-items: flex-start; flex-wrap: wrap; margin-top: .5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="rule-top">
+      <span>Santiago Meneses Gómez · Portfolio v2</span>
+      <span>Design directions · 3 modes</span>
+    </div>
+    <h1>Three ways in,<br>one <em>source of truth</em></h1>
+    <p class="lede">
+      The current site has one mode, and the theme is doing the talking. These three shells read from a
+      <strong>single typed content layer</strong> — so the personality becomes a choice the visitor makes,
+      not a tax they pay. Everything below is a live HTML comp, not a picture of one.
+    </p>
+  </header>
+
+  <section class="spine">
+    <h2>The shared spine</h2>
+    <p>
+      <code>src/content/{profile,experience,projects}.ts</code> holds every fact once. Each mode is a renderer over
+      that data. Adding a project is appending one object — it appears in all three modes, with a real URL at
+      <code>/projects/&lt;slug&gt;</code>. Theme flavour (case IDs, statuses) lives in an optional <code>dossier</code>
+      block that Standard and Spatial simply ignore.
+    </p>
+  </section>
+
+  <!-- ================= MODE 01 : STANDARD ================= -->
+  <section class="mode">
+    <div class="mode-head">
+      <div class="mode-tag">
+        <span class="mode-num">Mode 01</span><span class="mode-dot"></span>
+        <span class="mode-role">Default landing · indexed · zero JS to first paint</span>
+      </div>
+      <h2>Standard</h2>
+      <p class="thesis">
+        Built for the person who has eight tabs open and four minutes. Name, role, research, and a way to
+        contact you are all above the fold. Academic serif over a warm off-white — closer to a well-set paper
+        than a product page, because the audience is a research group.
+      </p>
+    </div>
+
+    <div class="viewport">
+      <div class="vp-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span>popieyes.github.io</span>
+        <span>1440 × 900</span>
+      </div>
+      <div class="vp-body">
+        <div class="mock-std">
+          <div class="std-nav">
+            <div class="std-mark">Santiago Meneses Gómez</div>
+            <div class="std-links">
+              <span class="on">Research</span><span>Projects</span><span>Experience</span><span>Contact</span>
+            </div>
+            <div class="std-switch"><b>Standard</b> Dossier · Spatial</div>
+          </div>
+
+          <div class="std-hero">
+            <div>
+              <div class="std-eyebrow">Graphics Programmer · Research Engineer</div>
+              <h1>Real-time rendering, cloth simulation, and the pipelines underneath.</h1>
+              <p class="std-sub">
+                Assistant Research Engineer at MSLab, Rey Juan Carlos University. I work on 3D scene
+                vectorization to SVG and a full pipeline for the generation, assembly and simulation of
+                garment patterns. Outside the lab I build engines from scratch.
+              </p>
+              <div class="std-cta">
+                <span class="std-btn fill">Download CV</span>
+                <span class="std-btn">GitHub</span>
+                <span class="std-btn">LinkedIn</span>
+                <span class="std-btn">Email</span>
+              </div>
+            </div>
+            <dl class="std-facts">
+              <div class="std-fact"><dt>Affiliation</dt><dd>MSLab — URJC, Madrid</dd></div>
+              <div class="std-fact"><dt>Focus</dt><dd>Garment simulation · Real-time rendering</dd></div>
+              <div class="std-fact"><dt>Languages</dt><dd>C++ · C# · Python · GLSL / HLSL</dd></div>
+              <div class="std-fact"><dt>Graphics</dt><dd>Vulkan · OpenGL · Slang</dd></div>
+              <div class="std-fact"><dt>Education</dt><dd>MSc Computer Graphics, VR &amp; Games</dd></div>
+            </dl>
+          </div>
+
+          <div class="std-sec">
+            <div class="std-sec-head"><h2>Research</h2><span>MSLab · 2025 —</span></div>
+            <div class="std-research">
+              <div>
+                <p>
+                  My work at MSLab centres on a full pipeline for garment patterns: generating the 2D pattern
+                  pieces, assembling them into a wearable topology, and simulating the resulting cloth in
+                  real time.
+                </p>
+                <p>
+                  The front end is a custom React / Three.js engine; the simulation and tooling sit behind it.
+                  Much of the engineering is in making the two halves agree about geometry.
+                </p>
+              </div>
+              <div>
+                <p>
+                  A second thread covers vectorization of 3D scenes to SVG — turning rendered geometry into
+                  resolution-independent output, which is a surprisingly deep visibility problem.
+                </p>
+                <p>
+                  Both threads share a bias: I care about the part of graphics where correctness and
+                  performance stop being separable concerns.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="std-sec">
+            <div class="std-sec-head"><h2>Selected work</h2><span>5 projects</span></div>
+            <div class="std-grid">
+              <div class="std-card">
+                <div class="std-thumb" data-l="Deferred pass"></div>
+                <h3>Hernan Engine</h3>
+                <div class="meta">Engine · 2024 — ongoing</div>
+                <p>Engine built from scratch, decoupled from its editor so the backend can be swapped. OpenGL first, Vulkan in progress.</p>
+                <div class="std-stack"><span class="std-chip">C++</span><span class="std-chip">Vulkan</span><span class="std-chip">Slang</span></div>
+              </div>
+              <div class="std-card">
+                <div class="std-thumb" data-l="Path traced"></div>
+                <h3>Nori Path Tracer</h3>
+                <div class="meta">Rendering · 2025</div>
+                <p>Physically based path tracer written from the ground up — PDFs, importance sampling, and material interaction.</p>
+                <div class="std-stack"><span class="std-chip">C++</span><span class="std-chip">PBR</span></div>
+              </div>
+              <div class="std-card">
+                <div class="std-thumb" data-l="Tessellation"></div>
+                <h3>Water Toon Shader</h3>
+                <div class="meta">Shading · 2024</div>
+                <p>Tessellation and vertex displacement producing foam, wave motion and buoyancy on a stylised surface.</p>
+                <div class="std-stack"><span class="std-chip">HLSL</span><span class="std-chip">Unity</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="note"><h4>Fixes it lands</h4><p>CV, GitHub and LinkedIn appear above the fold — currently they appear nowhere on the site at all.</p></div>
+      <div class="note"><h4>Type</h4><p>Old-style serif for headings, system sans for data. Reads as a paper, not a product launch.</p></div>
+      <div class="note"><h4>Research gets a section</h4><p>Not one redacted line. It's the differentiator for a lab audience, so it gets real estate.</p></div>
+      <div class="note"><h4>Accessible by default</h4><p>Real heading order, one form, unique ids, visible focus, works at 320px.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= MODE 02 : DOSSIER ================= -->
+  <section class="mode">
+    <div class="mode-head">
+      <div class="mode-tag">
+        <span class="mode-num">Mode 02</span><span class="mode-dot"></span>
+        <span class="mode-role">Opt-in skin · same data · same routes</span>
+      </div>
+      <h2>Dossier</h2>
+      <p class="thesis">
+        Your investigation board, kept — but demoted from gatekeeper to garnish. The rule that makes it work:
+        <strong>redaction is decorative only.</strong> It never covers a skill, a date, a role, or anything a
+        reader needs. Flavour at the edges, truth in the middle.
+      </p>
+    </div>
+
+    <div class="viewport">
+      <div class="vp-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span>popieyes.github.io &nbsp;·&nbsp; mode=dossier</span>
+        <span>1440 × 900</span>
+      </div>
+      <div class="vp-body">
+        <div class="mock-dos">
+          <div class="dos-sheet">
+            <div class="dos-pin"></div>
+            <div class="dos-top">
+              <span>File 04 — Personnel</span>
+              <span class="r">Research Team MSLab<br>Rey Juan Carlos University<br>Madrid, Spain</span>
+            </div>
+
+            <div class="dos-title">
+              <div class="lbl">Subject</div>
+              <h1>Meneses Gómez</h1>
+              <div class="role">Graphics Programmer · Research Engineer</div>
+            </div>
+
+            <div class="dos-body">
+              <div>
+                <div class="dos-photo"></div>
+                <div class="dos-idcard">
+                  <div><span>Name</span><b>Santiago</b></div>
+                  <div><span>Role</span><b>Graphics Prg.</b></div>
+                  <div><span>Base</span><b>Madrid, ES</b></div>
+                  <div><span>Status</span><b>Active</b></div>
+                </div>
+              </div>
+
+              <div>
+                <p class="dos-h">01 — Overview</p>
+                <p>
+                  Assistant Research Engineer at MSLab, Rey Juan Carlos University. Work covers 3D scene
+                  vectorization to SVG and a complete pipeline for the generation, assembly and simulation
+                  of <span class="redact" aria-label="garment patterns">garment patterns</span>.
+                </p>
+                <p class="dos-h" style="margin-top:12px">02 — Background</p>
+                <p>
+                  Started in videogame development — game jams, Unity, a demo shown at Gamescom 2024 — then
+                  specialised into computer graphics through an MSc in Computer Graphics, Virtual Reality
+                  and Games. Now writes engines because understanding the whole stack beat borrowing one.
+                </p>
+              </div>
+
+              <div class="dos-side">
+                <div class="dos-box">
+                  <div class="k">Known competencies</div>
+                  <p>C++ / C# / Python</p>
+                  <p>Vulkan / OpenGL</p>
+                  <p>GLSL / HLSL / Slang</p>
+                  <p>Unity · Three.js</p>
+                </div>
+                <div class="dos-box">
+                  <div class="k">Deployment log</div>
+                  <p>07.25 — MSLab, URJC</p>
+                  <p>09.24 — MSc CGVRG</p>
+                  <p>06.23 — Kumiho Esports</p>
+                </div>
+                <div class="dos-stamp">Verified</div>
+              </div>
+            </div>
+
+            <div class="dos-cases">
+              <p class="dos-h">Appendix C — Case files</p>
+              <div class="dos-caserow">
+                <div class="dos-case">
+                  <div class="cid"><span>TECH-A</span><span class="st act">Active</span></div>
+                  <h4>Hernan Engine</h4>
+                  <div class="cimg"></div>
+                  <p>Custom engine, editor decoupled from backend. Vulkan implementation underway.</p>
+                </div>
+                <div class="dos-case">
+                  <div class="cid"><span>TECH-C</span><span class="st">Contained</span></div>
+                  <h4>Nori Path Tracer</h4>
+                  <div class="cimg"></div>
+                  <p>PBR path tracer built from scratch — PDFs, sampling, material response.</p>
+                </div>
+                <div class="dos-case">
+                  <div class="cid"><span>AWE-01</span><span class="st">Contained</span></div>
+                  <h4>Subject Zero</h4>
+                  <div class="cimg"></div>
+                  <p>Roguelike survival horror. Unity, C#. Procedural floors and progression.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="note"><h4>What changed</h4><p>No invented agencies, clearance levels, case numbers on real credentials, or 01.01.1990 dates.</p></div>
+      <div class="note"><h4>Redaction is honest now</h4><p>Decorative only, with <code style="font-family:var(--mono);font-size:.85em">aria-label</code> so screen readers get the real words.</p></div>
+      <div class="note"><h4>Margin decor is CSS</h4><p>The blurred side papers become a background layer — not 200 lines of duplicated markup with 9 clashing DOM ids.</p></div>
+      <div class="note"><h4>Same routes</h4><p>Switching modes keeps your place. A project link opens in whichever mode the visitor chose.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= MODE 03 : SPATIAL ================= -->
+  <section class="mode">
+    <div class="mode-head">
+      <div class="mode-tag">
+        <span class="mode-num">Mode 03</span><span class="mode-dot"></span>
+        <span class="mode-role">Lazy · click to enter · never on mobile data</span>
+      </div>
+      <h2>Spatial</h2>
+      <p class="thesis">
+        Not a room you walk through — an <strong>instrument you operate</strong>. The comp below previews the
+        direction I'd actually recommend: your own cloth research running live, with G-buffer channels you
+        can toggle. It demonstrates the skill instead of describing it.
+      </p>
+    </div>
+
+    <div class="viewport">
+      <div class="vp-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span>popieyes.github.io &nbsp;·&nbsp; mode=spatial</span>
+        <span>WebGL 2 · Draco</span>
+      </div>
+      <div class="vp-body">
+        <div class="mock-spa">
+          <div class="spa-stage">
+            <canvas id="clothCanvas"></canvas>
+            <div class="spa-vig"></div>
+
+            <div class="hud hud-tl">
+              <div class="t1">Garment Solver — Live</div>
+              <div class="t2">Position-based dynamics · 48 × 32 grid</div>
+            </div>
+            <div class="hud hud-tr">
+              <div><b>60</b> fps</div>
+              <div><b>1.53 M</b> tris</div>
+              <div><b>4.2 MB</b> loaded</div>
+            </div>
+
+            <div class="passes">
+              <div class="ph">Render pass</div>
+              <button class="on" type="button">Beauty</button>
+              <button type="button">Albedo</button>
+              <button type="button">Normal</button>
+              <button type="button">Depth</button>
+              <button type="button">Wireframe</button>
+            </div>
+
+            <div class="reticle">
+              <i></i><i></i><i></i><i></i>
+              <span>Drag to pin the cloth</span>
+            </div>
+
+            <div class="perfbar">
+              <div class="lb">GPU</div>
+              <div class="track"><i></i></div>
+              <div class="lb">7.1 ms</div>
+            </div>
+
+            <div class="dock">
+              <div class="slot on"><div class="sh"></div><div class="sn">Garment<br>Solver</div></div>
+              <div class="slot"><div class="sh"></div><div class="sn">Hernan<br>Engine</div></div>
+              <div class="slot"><div class="sh"></div><div class="sn">Nori<br>Tracer</div></div>
+              <div class="slot"><div class="sh"></div><div class="sn">Water<br>Shader</div></div>
+            </div>
+
+            <div class="exit">Esc — back to Standard</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div class="note"><h4>Budget</h4><p>~5 MB Draco-compressed, down from 85 MB of uncompressed .glb. Nothing loads until a click.</p></div>
+      <div class="note"><h4>It shows the work</h4><p>Every control on screen is a claim from your CV, made verifiable in one gesture.</p></div>
+      <div class="note"><h4>Always escapable</h4><p>Esc, a visible exit, and a URL that survives the jump. No one gets trapped in the toy.</p></div>
+      <div class="note"><h4>Graceful floor</h4><p>No WebGL 2, low power, or reduced-motion → a still frame and a link to Standard.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= SWITCHER ================= -->
+  <section class="mode">
+    <div class="mode-head">
+      <h2>How the switch behaves</h2>
+      <p class="thesis">Persisted to <code style="font-family:var(--mono);font-size:.9em">localStorage</code>, announced once, never modal. The mode is a query param so a shared link carries it.</p>
+    </div>
+    <div class="switchbar">
+      <div class="sw is-default">
+        <div class="swk">Default</div>
+        <div class="swn">Standard</div>
+        <p>What a stranger, a recruiter, or a lab gets on first visit. Fastest path to your work.</p>
+      </div>
+      <div class="sw">
+        <div class="swk">One click</div>
+        <div class="swn">Dossier</div>
+        <p>Same content, your voice. For people who'll enjoy it — and they'll find it immediately.</p>
+      </div>
+      <div class="sw">
+        <div class="swk">Explicit opt-in</div>
+        <div class="swn">Spatial</div>
+        <p>Gated behind a click and a size warning. Desktop and WebGL 2 only.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IDEAS ================= -->
+  <section class="mode">
+    <div class="mode-head">
+      <div class="mode-tag"><span class="mode-num">Rebuild</span><span class="mode-dot"></span><span class="mode-role">Six directions for the 3D experience</span></div>
+      <h2>What the spatial mode could be</h2>
+      <p class="thesis">
+        Ranked by what they actually prove to someone deciding whether to interview you. The old office scene
+        cost 85 MB and demonstrated that you can load a model; these cost less and demonstrate that you can
+        build a renderer.
+      </p>
+    </div>
+
+    <div class="ideas">
+
+      <div class="idea rec">
+        <div class="ix">01</div>
+        <div>
+          <span class="flag">◆ Recommended</span>
+          <h3>The garment table</h3>
+          <p>
+            Your MSLab research, playable. Flat 2D pattern pieces lie on a table; hit assemble and they seam
+            together and fall into a simulated garment. Grab a vertex and drag — the solver responds. Sliders
+            for stiffness, damping, wind.
+          </p>
+          <p class="why"><b>Why it wins:</b> no other portfolio on earth has this, because it's your actual research. It's the single strongest artefact you could put in front of a graphics lab.</p>
+        </div>
+        <div class="chips"><span class="chip pay-hi">Payoff high</span><span class="chip eff-hi">Effort high</span></div>
+      </div>
+
+      <div class="idea rec">
+        <div class="ix">02</div>
+        <div>
+          <span class="flag">◆ Recommended</span>
+          <h3>Render pass inspector</h3>
+          <p>
+            One scene, and a row of buttons that swap the visible buffer: beauty, albedo, world normal, depth,
+            AO, wireframe. Optionally a split-screen wipe so two passes sit side by side.
+          </p>
+          <p class="why"><b>Why it wins:</b> it's legible in three seconds to anyone who knows deferred rendering, and cheap — one scene, a handful of shaders. Best payoff per hour on this list.</p>
+        </div>
+        <div class="chips"><span class="chip pay-hi">Payoff high</span><span class="chip">Effort low</span></div>
+      </div>
+
+      <div class="idea">
+        <div class="ix">03</div>
+        <div>
+          <h3>Live shader editor</h3>
+          <p>
+            A GLSL fragment shader in a panel, its output filling the viewport, recompiling as you type.
+            Preload it with your water shader. Errors surface inline; a reset button undoes the damage.
+          </p>
+          <p class="why"><b>Trade-off:</b> spectacular for the right visitor, meaningless to a non-technical one. Great as a secondary panel, risky as the whole experience.</p>
+        </div>
+        <div class="chips"><span class="chip pay-hi">Payoff high</span><span class="chip pay-md">Effort med</span></div>
+      </div>
+
+      <div class="idea">
+        <div class="ix">04</div>
+        <div>
+          <h3>Progressive path tracer</h3>
+          <p>
+            Ties to your Nori work. A small scene renders live, accumulating samples — visibly noisy at first,
+            converging over a few seconds, with a sample counter and a denoise toggle.
+          </p>
+          <p class="why"><b>Trade-off:</b> the convergence is genuinely hypnotic and it self-documents. But it's the heaviest GPU load here, so it needs a hard sample cap and a bail-out.</p>
+        </div>
+        <div class="chips"><span class="chip pay-md">Payoff med</span><span class="chip pay-md">Effort med</span></div>
+      </div>
+
+      <div class="idea">
+        <div class="ix">05</div>
+        <div>
+          <h3>The workstation, rebuilt</h3>
+          <p>
+            The original concept done properly: a desk where every object maps to a real project. Click the
+            monitor for the engine, the camera for photography, the console for the Unity games. Camera dollies
+            to each hotspot; content is read from <code style="font-family:var(--mono);font-size:.9em">projects.ts</code>.
+          </p>
+          <p class="why"><b>Trade-off:</b> charming, and the models mostly exist. But it proves asset loading, not graphics skill — and decimating <code style="font-family:var(--mono);font-size:.9em">office.glb</code> from 31 MB is real work for a modest return.</p>
+        </div>
+        <div class="chips"><span class="chip pay-md">Payoff med</span><span class="chip eff-hi">Effort high</span></div>
+      </div>
+
+      <div class="idea">
+        <div class="ix">06</div>
+        <div>
+          <h3>Performance ladder</h3>
+          <p>
+            A visible quality dial — resolution scale, shadow cascades, SSAO samples — with frame time and
+            draw calls updating live as the visitor degrades their own experience.
+          </p>
+          <p class="why"><b>Trade-off:</b> a small, cheap addition rather than a mode of its own. Bolt it onto whichever direction you pick; it signals optimisation instinct for almost no cost.</p>
+        </div>
+        <div class="chips"><span class="chip pay-md">Payoff med</span><span class="chip">Effort low</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="verdict">
+    <h3>My read</h3>
+    <p>
+      Ship <strong>02 first</strong> — the render pass inspector is a weekend of work and it's the clearest
+      signal on the list. Then build <strong>01</strong>, the garment table, as the centrepiece, because it's
+      the one thing that is uniquely yours and it doubles as a live demo of your research. Fold in
+      <strong>06</strong> as HUD chrome around whichever you build.
+    </p>
+    <p>
+      I'd retire the office scene. It's 85 MB, it's the most work here, and a room with a desk in it says less
+      about you as a graphics programmer than sixty seconds with a depth buffer does. The personality it was
+      carrying now lives in Dossier mode, where it costs nothing.
+    </p>
+  </section>
+
+  <footer>
+    <span>Portfolio v2 · Design directions</span>
+    <span>Comps are live HTML · See PLAN.md for the build order</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var cv = document.getElementById('clothCanvas');
+  if (!cv) return;
+  var ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var COLS = 26, ROWS = 16;
+
+  function resize() {
+    var r = cv.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.max(1, Math.floor(r.width * dpr));
+    cv.height = Math.max(1, Math.floor(r.height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return r;
+  }
+
+  var rect = resize();
+  window.addEventListener('resize', function () { rect = resize(); });
+
+  // project a point on a draped grid into 2D with cheap perspective
+  function project(u, v, t, w, h) {
+    var x = (u - 0.5) * 2;
+    var z = (v - 0.5) * 2;
+    // drape: sag toward the centre, plus a travelling wave
+    var sag = -Math.cos(x * 1.35) * 0.34 - Math.cos(z * 1.2) * 0.22;
+    var wave = Math.sin(x * 2.6 + t) * 0.075 + Math.sin(z * 3.1 - t * 0.8) * 0.055;
+    var y = sag + wave;
+
+    var yaw = 0.42;
+    var cx = x * Math.cos(yaw) - z * Math.sin(yaw);
+    var cz = x * Math.sin(yaw) + z * Math.cos(yaw) + 4.1;
+    var cy = y - 0.12;
+
+    var f = 2.5;
+    return {
+      x: w * 0.5 + (cx * f / cz) * w * 0.42,
+      y: h * 0.47 - (cy * f / cz) * w * 0.42,
+      d: cz
+    };
+  }
+
+  function draw(t) {
+    var w = rect.width, h = rect.height;
+    if (!w || !h) return;
+    ctx.clearRect(0, 0, w, h);
+
+    var pts = [];
+    for (var j = 0; j <= ROWS; j++) {
+      var row = [];
+      for (var i = 0; i <= COLS; i++) {
+        row.push(project(i / COLS, j / ROWS, t, w, h));
+      }
+      pts.push(row);
+    }
+
+    // shaded quads, depth-cued
+    for (var j2 = 0; j2 < ROWS; j2++) {
+      for (var i2 = 0; i2 < COLS; i2++) {
+        var a = pts[j2][i2], b = pts[j2][i2 + 1], c = pts[j2 + 1][i2 + 1], d = pts[j2 + 1][i2];
+        // face normal proxy from screen-space area → fake lambert
+        var ar = (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
+        var lit = Math.min(1, Math.max(0, Math.abs(ar) / 420));
+        var fog = Math.min(1, Math.max(0, (5.6 - a.d) / 2.4));
+        var l = lit * fog;
+        ctx.fillStyle = 'rgba(' + Math.round(24 + l * 46) + ',' + Math.round(46 + l * 118) + ',' + Math.round(58 + l * 112) + ',' + (0.16 + l * 0.5) + ')';
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y); ctx.lineTo(d.x, d.y);
+        ctx.closePath(); ctx.fill();
+      }
+    }
+
+    // wireframe over the top
+    ctx.lineWidth = 0.6;
+    ctx.strokeStyle = 'rgba(87,210,192,0.30)';
+    ctx.beginPath();
+    for (var j3 = 0; j3 <= ROWS; j3++) {
+      for (var i3 = 0; i3 <= COLS; i3++) {
+        var p = pts[j3][i3];
+        if (i3 === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+      }
+    }
+    for (var i4 = 0; i4 <= COLS; i4++) {
+      for (var j4 = 0; j4 <= ROWS; j4++) {
+        var q = pts[j4][i4];
+        if (j4 === 0) ctx.moveTo(q.x, q.y); else ctx.lineTo(q.x, q.y);
+      }
+    }
+    ctx.stroke();
+
+    // pinned corners
+    ctx.fillStyle = '#57D2C0';
+    [[0, 0], [COLS, 0]].forEach(function (pc) {
+      var pp = pts[pc[1]][pc[0]];
+      ctx.beginPath(); ctx.arc(pp.x, pp.y, 2.6, 0, Math.PI * 2); ctx.fill();
+    });
+  }
+
+  if (reduce) {
+    draw(0.7);
+  } else {
+    var start = null;
+    (function loop(ts) {
+      if (start === null) start = ts;
+      draw((ts - start) / 1000 * 0.9);
+      requestAnimationFrame(loop);
+    })(performance.now());
+  }
+})();
+</script>
