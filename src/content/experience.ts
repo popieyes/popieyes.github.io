@@ -13,15 +13,15 @@ import type { Role } from './types';
 export const experience: Role[] = [
   {
     start: '2025-07',
-    end: '2026-02',
-    period: 'Jul 2025 — Feb 2026',
-    title: 'Assistant Research Engineer',
+    end: '-',
+    period: 'Jul 2025 — Ongoing',
+    title: 'Research Engineer',
     org: 'MSLab — Rey Juan Carlos University',
     location: 'Madrid, Spain',
     kind: 'work',
     current: true,
     notes:
-      'Researching solutions for vectorizing 3D scenes to SVG, and building front-end and back-end tooling for cloth simulation inside a custom React and Three.js engine.',
+      'Researching solutions for vectorizing 3D scenes to SVG, and building front-end and back-end tooling for cloth simulation.',
   },
   {
     start: '2024-09',
@@ -32,12 +32,12 @@ export const experience: Role[] = [
     location: 'Madrid, Spain',
     kind: 'study',
     notes:
-      'Rendering projects in Vulkan and OpenGL, implementing advanced effects including SSAO and ray tracing.',
+      'Rendering projects in Vulkan and OpenGL, implementing advanced effects with a big focus on offline and real-time rendering. Simulation projects involving fluids and deformable rigidbodies.',
   },
   {
-    start: '2023-06',
-    end: '2023-08',
-    period: 'Jun 2023 — Aug 2023',
+    start: '2024-06',
+    end: '2024-08',
+    period: 'Jun 2024 — Aug 2024',
     title: 'Gameplay Programmer, Internship',
     org: 'Kumiho Esports S.L.',
     location: 'Spain',

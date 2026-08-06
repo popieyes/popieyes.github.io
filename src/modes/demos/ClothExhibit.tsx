@@ -26,16 +26,30 @@ type Particle = {
 
 type Constraint = { a: number; b: number; rest: number };
 
+/** Cloth reads dark-on-light or light-on-dark so it sits in either theme. */
+const PALETTES = {
+  dark: { r: 26, g: 58, b: 72, lr: 44, lg: 120, lb: 110, base: 0.22, gain: 0.55,
+          seam: 'rgba(87, 210, 192, 0.26)', pin: '#57d2c0' },
+  light: { r: 150, g: 176, b: 186, lr: -60, lg: -70, lb: -60, base: 0.30, gain: 0.55,
+           seam: 'rgba(31, 92, 140, 0.30)', pin: '#1f5c8c' },
+} as const;
+
 export default function ClothExhibit({
   wind,
+  theme = 'dark',
   onTear,
 }: {
   wind: number;
+  theme?: 'light' | 'dark';
   onTear?: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const windRef = useRef(wind);
   windRef.current = wind;
+  // Held in a ref so switching theme repaints without restarting the solver —
+  // the drape you already pulled into shape stays put.
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
   const onTearRef = useRef(onTear);
   onTearRef.current = onTear;
 
@@ -228,6 +242,7 @@ export default function ClothExhibit({
 
     function draw() {
       ctx!.clearRect(0, 0, width, height);
+      const palette = PALETTES[themeRef.current];
 
       // Shade each quad by its screen-space area — a cheap stand-in for a
       // normal, which reads convincingly as folds catching the light.
@@ -242,9 +257,9 @@ export default function ClothExhibit({
           const area = Math.abs((b.x - a.x) * (d.y - a.y) - (d.x - a.x) * (b.y - a.y));
           const lit = Math.min(1, area / (spacing * spacing));
 
-          ctx!.fillStyle = `rgba(${Math.round(26 + lit * 44)}, ${Math.round(
-            58 + lit * 120
-          )}, ${Math.round(72 + lit * 110)}, ${0.22 + lit * 0.55})`;
+          ctx!.fillStyle = `rgba(${Math.round(palette.r + lit * palette.lr)}, ${Math.round(
+            palette.g + lit * palette.lg
+          )}, ${Math.round(palette.b + lit * palette.lb)}, ${palette.base + lit * palette.gain})`;
 
           ctx!.beginPath();
           ctx!.moveTo(a.x, a.y);
@@ -257,7 +272,7 @@ export default function ClothExhibit({
       }
 
       // Seam lines — the structure the solver is actually enforcing.
-      ctx!.strokeStyle = 'rgba(87, 210, 192, 0.26)';
+      ctx!.strokeStyle = palette.seam;
       ctx!.lineWidth = 0.7;
       ctx!.beginPath();
       for (const c of constraints) {
@@ -269,7 +284,7 @@ export default function ClothExhibit({
       ctx!.stroke();
 
       // Pins along the rail.
-      ctx!.fillStyle = '#57d2c0';
+      ctx!.fillStyle = palette.pin;
       for (const p of particles) {
         if (!p.pinned) continue;
         ctx!.beginPath();

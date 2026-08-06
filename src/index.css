@@ -29,11 +29,12 @@
   --color-dossier-line: #b5b0a3;
   --color-dossier-red: #8e2b24;
 
-  /* Spatial mode — viewport chrome. */
-  --color-spatial-bg: #090c10;
-  --color-spatial-hud: #c6d2dc;
-  --color-spatial-acc: #57d2c0;
-  --color-spatial-line: #1e2833;
+  /* Demos accent — used for the live/provenance badges on the WebGL stage.
+     The stage itself follows the portfolio's light/dark tokens. */
+  --color-demo-bg: #090c10;
+  --color-demo-hud: #c6d2dc;
+  --color-demo-acc: #57d2c0;
+  --color-demo-line: #1e2833;
 }
 
 /* ============================================================================
@@ -104,17 +105,6 @@
   color-scheme: dark;
 }
 
-:root[data-mode='spatial'] {
-  --bg: var(--color-spatial-bg);
-  --surface: #101720;
-  --fg: var(--color-spatial-hud);
-  --fg-muted: #6c7a87;
-  --rule: var(--color-spatial-line);
-  --accent: var(--color-spatial-acc);
-  --marker: var(--color-spatial-acc);
-
-  color-scheme: dark;
-}
 
 /* ============================================================================
    Base

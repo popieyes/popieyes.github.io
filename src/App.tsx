@@ -5,16 +5,16 @@ import { ModeProvider, useMode } from './ModeContext';
 import { ThemeProvider } from './ThemeContext';
 import { getProject } from './content/projects';
 
-import StandardHome from './modes/standard/StandardHome';
-import StandardProject from './modes/standard/StandardProject';
+import PortfolioHome from './modes/portfolio/PortfolioHome';
+import PortfolioProject from './modes/portfolio/PortfolioProject';
 import DossierHome from './modes/dossier/DossierHome';
 import DossierProject from './modes/dossier/DossierProject';
 
-/* Spatial pulls in three.js and the WebGL exhibits. It must never be part of
-   the initial bundle — nobody pays for it until they ask for it. */
-const SpatialHome = lazy(() => import('./modes/spatial/SpatialHome'));
+/* Demos carry the WebGL exhibits. They must never be part of the initial
+   bundle — nobody pays for them until they ask. */
+const DemosHome = lazy(() => import('./modes/demos/DemosHome'));
 
-function SpatialFallback() {
+function DemosFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <p className="type-label" style={{ color: 'var(--fg-muted)' }}>
@@ -28,14 +28,14 @@ function Home() {
   const { mode } = useMode();
 
   if (mode === 'dossier') return <DossierHome />;
-  if (mode === 'spatial') {
+  if (mode === 'demos') {
     return (
-      <Suspense fallback={<SpatialFallback />}>
-        <SpatialHome />
+      <Suspense fallback={<DemosFallback />}>
+        <DemosHome />
       </Suspense>
     );
   }
-  return <StandardHome />;
+  return <PortfolioHome />;
 }
 
 function ProjectRoute() {
@@ -45,11 +45,10 @@ function ProjectRoute() {
 
   if (!project) return <NotFound />;
 
-  /* Spatial has no per-project page of its own — its exhibits live on the
-     landing view — so a project link there falls back to the Standard write-up.
-     Better to show the work than to invent a page that says nothing. */
+  /* Demos has no per-project page of its own — its exhibits live on the landing
+     view — so a project link there falls back to the portfolio write-up. */
   if (mode === 'dossier') return <DossierProject project={project} />;
-  return <StandardProject project={project} />;
+  return <PortfolioProject project={project} />;
 }
 
 function NotFound() {

@@ -3,7 +3,7 @@ import type { Project } from './types';
 /**
  * ─── ADDING A PROJECT ────────────────────────────────────────────────────────
  * Append one object. It appears in all three modes automatically, gets a
- * permalink at /projects/<slug>, and shows up in the Spatial dock if you give
+ * permalink at /projects/<slug>, and shows up in Demos if you give
  * it an `exhibit` id. Nothing else to edit.
  *
  * ─── DATES ───────────────────────────────────────────────────────────────────

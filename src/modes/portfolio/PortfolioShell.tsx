@@ -30,7 +30,7 @@ function ThemeToggle() {
   );
 }
 
-export default function StandardShell({ children }: { children: React.ReactNode }) {
+export default function PortfolioShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>
       <a

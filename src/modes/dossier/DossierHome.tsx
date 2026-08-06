@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 
 import DossierShell from './DossierShell';
 import { Barcode, FieldRow, PaperStack, Pushpin, Redaction, Sheet, Stamp } from './parts';
-import ContactForm from '../../components/ContactForm';
 import Reveal from '../../components/Reveal';
 import { profile } from '../../content/profile';
 import { experience } from '../../content/experience';
@@ -320,15 +319,38 @@ export default function DossierHome() {
             <Pushpin className="absolute left-6 top-3 z-20 size-5" color="blue" />
             <Pushpin className="absolute right-6 top-3 z-20 size-5" color="blue" />
 
-            <div className="mx-auto max-w-2xl">
-              <h2 className="text-center font-display text-xl font-black uppercase tracking-[0.16em]">
+            {/* No form here. An address someone can copy is more use than a
+                text box, and one fewer thing that can silently fail. */}
+            <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
+              <h2 className="font-display text-xl font-black uppercase tracking-[0.16em]">
                 Secure comms
               </h2>
-              <p className="mb-8 mt-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] opacity-60">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] opacity-60">
                 Direct transmission to subject: {profile.shortName}
               </p>
 
-              <ContactForm tone="dossier" />
+              <a
+                href={`mailto:${profile.email}`}
+                className="border-b-2 pb-1 font-mono text-lg tracking-tight transition-opacity hover:opacity-70"
+                style={{ borderColor: 'var(--color-dossier-red)' }}
+              >
+                {profile.email}
+              </a>
+
+              <div className="flex flex-wrap justify-center gap-2 pt-2">
+                {profile.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="border-2 px-5 py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors hover:bg-[color:var(--color-dossier-ink)] hover:text-[color:var(--color-dossier-paper)]"
+                    style={{ borderColor: 'var(--color-dossier-ink)' }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </Sheet>
         </div>

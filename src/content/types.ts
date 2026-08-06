@@ -9,7 +9,7 @@
  *     made half the project copy render as broken tags.
  *
  *  2. THEME FLAVOUR IS OPTIONAL AND SEGREGATED. Dossier-only garnish lives in
- *     the `dossier` block. Standard and Spatial ignore it entirely, so a
+ *     the `dossier` block. The portfolio and demos ignore it entirely, so a
  *     costume change can never overwrite a fact.
  */
 
@@ -53,12 +53,23 @@ export type Project = {
   technical?: string;
   links?: Link[];
   media: Media[];
+  /**
+   * How the images sit on the project page. Defaults to 'carousel'.
+   *
+   *   carousel  One at a time with thumbnails. Best when the shots are
+   *             variations on the same view, or when there are many.
+   *   aside     Images stack in a column beside the write-up. Best when each
+   *             shot illustrates a different point in the text.
+   *   grid      All of them, full width, below the write-up. Best for a small
+   *             number of images that deserve to be seen at size.
+   */
+  mediaLayout?: 'carousel' | 'aside' | 'grid';
   /** Surfaced first on the landing page. */
   featured?: boolean;
   dossier: DossierMeta;
   /**
-   * Id of the Spatial-mode exhibit that demonstrates this project live,
-   * if one exists. See modes/spatial/exhibits.
+   * Id of the demo that demonstrates this project, if one exists.
+   * See modes/demos/registry.ts.
    */
   exhibit?: string;
 };

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import StandardShell from './StandardShell';
-import ContactForm from '../../components/ContactForm';
+import PortfolioShell from './PortfolioShell';
 import Reveal from '../../components/Reveal';
 import { profile } from '../../content/profile';
 import { experience } from '../../content/experience';
@@ -101,11 +100,11 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-export default function StandardHome() {
+export default function PortfolioHome() {
   const [lead, ...rest] = profile.research.split('\n\n');
 
   return (
-    <StandardShell>
+    <PortfolioShell>
       <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
         {/* ── Hero ─────────────────────────────────────────────────────────
             Left: the claim. Right: the person, cut out like a pattern piece,
@@ -123,7 +122,7 @@ export default function StandardHome() {
                 className="type-display text-[clamp(2.1rem,6.5vw,4.2rem)]"
                 style={{ fontVariationSettings: "'wdth' 115, 'wght' 750" }}
               >
-                Real-time rendering, cloth simulation, and the pipelines underneath.
+                Real-time rendering, custom engines, and game development.
               </h1>
             </Reveal>
 
@@ -223,7 +222,7 @@ export default function StandardHome() {
             id="research"
             label="Current research"
             title="What I work on at MSLab"
-            aside="2025 —"
+            aside="2025 — Ongoing"
           />
           <Reveal delay={60}>
             <p className="measure pt-7 text-base leading-relaxed md:text-lg">{lead}</p>
@@ -311,38 +310,45 @@ export default function StandardHome() {
             id="contact"
             label="Get in touch"
             title="Contact"
-            aside="Usually replies within a few days"
+            aside="Replies are usually within a few days"
           />
-          <div className="grid gap-10 pt-8 md:grid-cols-[1fr_1.1fr] md:gap-16">
-            <Reveal>
-              <div className="flex flex-col gap-4">
-                <p
-                  className="text-[0.95rem] leading-relaxed"
-                  style={{ color: 'var(--fg-muted)' }}
-                >
-                  Happy to talk about graphics work, research positions, or anything
-                  involving a renderer that misbehaves. Email is the most reliable
-                  route — the form goes to the same place.
-                </p>
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="type-display text-lg underline underline-offset-4 transition-opacity hover:opacity-70"
-                  style={{ fontVariationSettings: "'wdth' 100, 'wght' 600" }}
-                >
-                  {profile.email}
-                </a>
-                <p className="type-label pt-2" style={{ color: 'var(--fg-muted)' }}>
-                  Off the clock: {profile.interests.join(', ').toLowerCase()}
-                </p>
-              </div>
-            </Reveal>
+          <Reveal className="pt-8">
+            <div className="flex flex-col gap-5">
+              <p className="measure text-[0.95rem] leading-relaxed" style={{ color: 'var(--fg-muted)' }}>
+                Happy to talk about graphics work, research positions, or anything
+                involving a renderer that misbehaves.
+              </p>
 
-            <Reveal delay={120}>
-              <ContactForm />
-            </Reveal>
-          </div>
+              <a
+                href={`mailto:${profile.email}`}
+                className="type-display text-xl underline underline-offset-4 transition-opacity hover:opacity-70 md:text-2xl"
+                style={{ fontVariationSettings: "'wdth' 104, 'wght' 620" }}
+              >
+                {profile.email}
+              </a>
+
+              <div className="flex flex-wrap gap-2">
+                {profile.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="type-label border px-4 py-2.5 transition-transform duration-200 hover:-translate-y-0.5"
+                    style={{ borderColor: 'var(--fg)', color: 'var(--fg)' }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+
+              <p className="type-label pt-1" style={{ color: 'var(--fg-muted)' }}>
+                Off the clock: {profile.interests.join(', ').toLowerCase()}
+              </p>
+            </div>
+          </Reveal>
         </section>
       </div>
-    </StandardShell>
+    </PortfolioShell>
   );
 }

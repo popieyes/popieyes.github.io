@@ -1,9 +1,9 @@
-import { MODES, MODE_BLURBS, MODE_LABELS, useMode, type Mode } from '../ModeContext';
+import { MODE_BLURBS, MODE_LABELS, VISIBLE_MODES, useMode } from '../ModeContext';
 
 /**
- * The one control that has to look right on all three grounds, so it is styled
- * entirely from tokens. Reads as a set of tabs because that is what it is —
- * three views of one thing, not three destinations.
+ * Reads as tabs because that is what it is — two views of one body of work,
+ * not two destinations. Styled entirely from tokens so it looks native in
+ * whichever mode is showing.
  */
 export default function ModeSwitch({ compact = false }: { compact?: boolean }) {
   const { mode, setMode } = useMode();
@@ -11,11 +11,11 @@ export default function ModeSwitch({ compact = false }: { compact?: boolean }) {
   return (
     <div
       role="tablist"
-      aria-label="Choose how to view this portfolio"
+      aria-label="Choose how to view this work"
       className="inline-flex items-stretch border"
       style={{ borderColor: 'var(--rule)' }}
     >
-      {MODES.map((option: Mode) => {
+      {VISIBLE_MODES.map((option) => {
         const isActive = option === mode;
         return (
           <button
@@ -26,9 +26,9 @@ export default function ModeSwitch({ compact = false }: { compact?: boolean }) {
             title={MODE_BLURBS[option]}
             onClick={() => setMode(option)}
             className={[
-              'type-label px-3 py-2 transition-colors duration-200 cursor-pointer',
+              'type-label cursor-pointer px-3 py-2 transition-colors duration-200',
               compact ? 'text-[0.6rem]' : '',
-              isActive ? 'font-semibold' : 'hover:opacity-100 opacity-60',
+              isActive ? 'font-semibold' : 'opacity-60 hover:opacity-100',
             ].join(' ')}
             style={{
               background: isActive ? 'var(--accent)' : 'transparent',

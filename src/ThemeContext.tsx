@@ -12,7 +12,7 @@ export type Theme = 'light' | 'dark';
 const STORAGE_KEY = 'portfolio:theme';
 
 /**
- * Light and dark apply to Standard mode only — Dossier and Spatial each commit
+ * Light and dark apply to the portfolio only — Dossier and Demos each commit
  * to a single visual world, so their tokens override these in index.css.
  * Unset means "follow the OS", which is the right default.
  */

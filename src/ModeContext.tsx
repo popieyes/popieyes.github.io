@@ -7,19 +7,26 @@ import React, {
   useState,
 } from 'react';
 
-export const MODES = ['standard', 'dossier', 'spatial'] as const;
+export const MODES = ['portfolio', 'demos', 'dossier'] as const;
 export type Mode = (typeof MODES)[number];
 
+/**
+ * What the switch offers. Dossier is built and reachable at ?mode=dossier, but
+ * it stays out of the UI until it's finished — a half-done costume is worse
+ * than no costume. Add it back here to ship it.
+ */
+export const VISIBLE_MODES: Mode[] = ['portfolio', 'demos'];
+
 export const MODE_LABELS: Record<Mode, string> = {
-  standard: 'Standard',
+  portfolio: 'Portfolio',
+  demos: 'Demos',
   dossier: 'Dossier',
-  spatial: 'Spatial',
 };
 
 export const MODE_BLURBS: Record<Mode, string> = {
-  standard: 'Everything, plainly laid out',
+  portfolio: 'The work, written up',
+  demos: 'Things running live in your browser',
   dossier: 'The same work, in costume',
-  spatial: 'Live demos in the browser',
 };
 
 const STORAGE_KEY = 'portfolio:mode';
@@ -31,10 +38,10 @@ function isMode(value: string | null): value is Mode {
 /**
  * Resolution order: an explicit ?mode= in the URL wins, so a shared link always
  * lands where the sender intended. Otherwise fall back to what this visitor
- * chose last. Otherwise Standard.
+ * chose last. Otherwise the portfolio.
  */
 function resolveInitialMode(): Mode {
-  if (typeof window === 'undefined') return 'standard';
+  if (typeof window === 'undefined') return 'portfolio';
 
   const fromUrl = new URLSearchParams(window.location.search).get('mode');
   if (isMode(fromUrl)) return fromUrl;
@@ -43,30 +50,24 @@ function resolveInitialMode(): Mode {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (isMode(stored)) return stored;
   } catch {
-    /* Private browsing or storage disabled — Standard is a fine answer. */
+    /* Private browsing or storage disabled — the portfolio is a fine answer. */
   }
 
-  return 'standard';
+  return 'portfolio';
 }
 
 type ModeContextValue = {
   mode: Mode;
   setMode: (mode: Mode) => void;
-  /** True until the visitor has actively chosen, so we can avoid nagging. */
-  isDefault: boolean;
 };
 
 const ModeContext = createContext<ModeContextValue | undefined>(undefined);
 
 export function ModeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<Mode>(resolveInitialMode);
-  const [isDefault, setIsDefault] = useState(
-    () => !isMode(new URLSearchParams(window.location.search).get('mode'))
-  );
 
   const setMode = useCallback((next: Mode) => {
     setModeState(next);
-    setIsDefault(false);
 
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
@@ -74,10 +75,10 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
       /* Non-fatal: the mode still applies for this session. */
     }
 
-    // Keep the URL truthful without adding a history entry per toggle —
-    // the back button should undo navigation, not costume changes.
+    // Keep the URL truthful without adding a history entry per toggle — the
+    // back button should undo navigation, not view changes.
     const url = new URL(window.location.href);
-    if (next === 'standard') {
+    if (next === 'portfolio') {
       url.searchParams.delete('mode');
     } else {
       url.searchParams.set('mode', next);
@@ -90,10 +91,7 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.dataset.mode = mode;
   }, [mode]);
 
-  const value = useMemo(
-    () => ({ mode, setMode, isDefault }),
-    [mode, setMode, isDefault]
-  );
+  const value = useMemo(() => ({ mode, setMode }), [mode, setMode]);
 
   return <ModeContext.Provider value={value}>{children}</ModeContext.Provider>;
 }

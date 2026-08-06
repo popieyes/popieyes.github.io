@@ -1,6 +1,6 @@
 /**
  * Every exhibit is a fragment shader over a fullscreen triangle. No meshes, no
- * textures, no .glb — the entire Spatial mode adds a few kilobytes of source
+ * textures, no .glb — the entire demos mode adds a few kilobytes of source
  * rather than the 85 MB of models the old office scene needed.
  */
 
@@ -34,6 +34,7 @@ precision highp float;
 uniform vec2 uResolution;
 uniform float uTime;
 uniform float uMode;      // 0 beauty · 1 albedo · 2 normal · 3 depth · 4 AO · 5 steps
+uniform float uLight;     // 0 dark theme · 1 light theme
 out vec4 fragColor;
 ${COMMON}
 
@@ -65,7 +66,9 @@ vec2 map(vec3 p) {
 vec3 albedoFor(float id, vec3 p) {
   if (id < 0.5) {
     float check = mod(floor(p.x) + floor(p.z), 2.0);
-    return mix(vec3(0.22, 0.24, 0.26), vec3(0.32, 0.34, 0.37), check);
+    vec3 a = mix(vec3(0.22, 0.24, 0.26), vec3(0.62, 0.64, 0.66), uLight);
+    vec3 b = mix(vec3(0.32, 0.34, 0.37), vec3(0.78, 0.79, 0.81), uLight);
+    return mix(a, b, check);
   }
   if (id < 1.5) return vec3(0.85, 0.31, 0.24);
   if (id < 2.5) return vec3(0.34, 0.82, 0.74);
@@ -125,7 +128,9 @@ void main() {
     if (t > MAX_DIST) break;
   }
 
-  vec3 sky = mix(vec3(0.035, 0.05, 0.07), vec3(0.08, 0.12, 0.16), smoothstep(-0.3, 0.6, rd.y));
+  vec3 skyDark  = mix(vec3(0.035, 0.05, 0.07), vec3(0.08, 0.12, 0.16), smoothstep(-0.3, 0.6, rd.y));
+  vec3 skyLight = mix(vec3(0.90, 0.92, 0.94), vec3(0.68, 0.76, 0.86), smoothstep(-0.3, 0.6, rd.y));
+  vec3 sky = mix(skyDark, skyLight, uLight);
 
   if (hit.x < 0.0) {
     // Off-surface pixels still need to answer honestly per channel.
@@ -181,6 +186,7 @@ uniform vec2 uResolution;
 uniform float uTime;
 uniform float uFoam;   // foam width
 uniform float uBands;  // lighting quantisation steps
+uniform float uLight;  // 0 dark theme · 1 light theme
 out vec4 fragColor;
 ${COMMON}
 
@@ -214,7 +220,9 @@ void main() {
   vec3 up = cross(fw, rt);
   vec3 rd = normalize(uv.x * rt + uv.y * up + 1.5 * fw);
 
-  vec3 sky = mix(vec3(0.51, 0.72, 0.82), vec3(0.16, 0.30, 0.45), smoothstep(0.0, 0.5, rd.y));
+  vec3 skyDay  = mix(vec3(0.51, 0.72, 0.82), vec3(0.16, 0.30, 0.45), smoothstep(0.0, 0.5, rd.y));
+  vec3 skyDusk = mix(vec3(0.16, 0.20, 0.28), vec3(0.05, 0.07, 0.12), smoothstep(0.0, 0.5, rd.y));
+  vec3 sky = mix(skyDusk, skyDay, uLight);
 
   // March the objects first so they can occlude the water.
   float t = 0.0; bool hitObj = false; vec3 objP = vec3(0.0);
@@ -289,6 +297,7 @@ export const PATHTRACER_SHADER = `#version 300 es
 precision highp float;
 uniform vec2 uResolution;
 uniform float uFrame;
+uniform float uLight;
 uniform sampler2D uPrev;
 out vec4 fragColor;
 
@@ -353,7 +362,9 @@ vec3 trace(vec3 ro, vec3 rd) {
     if (bestIdx < 0) {
       // Sky as the remaining light source.
       float k = 0.5 * (rd.y + 1.0);
-      radiance += throughput * mix(vec3(0.16, 0.18, 0.22), vec3(0.42, 0.56, 0.78), k) * 0.9;
+      vec3 skyDark  = mix(vec3(0.16, 0.18, 0.22), vec3(0.42, 0.56, 0.78), k);
+      vec3 skyLight = mix(vec3(0.62, 0.66, 0.72), vec3(0.85, 0.92, 1.05), k);
+      radiance += throughput * mix(skyDark, skyLight, uLight) * 0.9;
       break;
     }
 
