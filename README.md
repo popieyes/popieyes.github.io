@@ -13,13 +13,11 @@ npm run deploy     # build + push to gh-pages
 
 ---
 
-## Before this goes live
-
-The only things on the site that aren't real. Grep for `TODO`.
+## Pending tasks
 
 - [x] ~~`EMAIL` and `LINKEDIN`~~ — done
 - [ ] `public/cv/santiago-meneses-cv.pdf` — add the PDF, or set `profile.cv` to `undefined` and the button disappears
-- [ ] Three projects have no `year` (see [Adding a project](#adding-a-project))
+- [ ] Review projects information (`data`,`year`) (see [Adding a project](#adding-a-project))
 
 ---
 
@@ -47,13 +45,12 @@ in every mode and gets a permalink at `/projects/<slug>`.
 }
 ```
 
-Two rules that keep this from rotting:
-
-1. **No markup in data.** Every string is plain text. Renderers apply emphasis.
+  - **No markup in data.** Every string is plain text. Renderers apply emphasis.
    The old codebase put `<Redaction>` tags inside data strings and rendered them
    with `dangerouslySetInnerHTML`, which meant several project descriptions
    displayed as broken tags.
-2. **Never invent a value to fill a field.** `year` is optional precisely so an
+
+- `year` is optional precisely so an
    unknown date renders as nothing rather than as `01.01.1990`.
 
 `mediaLayout` picks how the images sit on the project page:
@@ -108,8 +105,6 @@ margins. Two rules keep it honest:
 - **Redaction is decorative only.** It never covers a skill, date, role, or
   anything a reader needs, and it carries an `aria-label` with the real text. The
   previous version blacked out its own competencies list.
-- **No invented credentials.** No fabricated agencies, clearance levels, or case
-  numbers attached to real employment history.
 
 ### Demos
 
@@ -182,7 +177,7 @@ src/
   content/          Single source of truth. Plain data, no JSX.
     types.ts        The contract, with the rules that keep it honest
     profile.ts      Identity, links, research statement
-    experience.ts   Real work history only
+    experience.ts   Work history only
     projects.ts     Every project
   components/       Shared across modes (ContactForm, Gallery, Reveal, ModeSwitch)
   modes/

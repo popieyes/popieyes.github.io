@@ -37,6 +37,7 @@ export const projects: Project[] = [
       { src: '/images/gl/gl-3.webp', alt: 'Engine scene with material test geometry' },
       { src: '/images/gl/gl-4.webp', alt: 'Engine lighting pass output' },
     ],
+    mediaLayout: 'aside',
     dossier: { caseId: 'TECH-A', stamp: 'ACTIVE' },
   },
 
@@ -94,6 +95,7 @@ export const projects: Project[] = [
       { src: '/images/szero/zero2-game2.webp', alt: 'Lab corridor' },
       { src: '/images/szero/zero2-game3.webp', alt: 'Boss encounter' },
     ],
+    mediaLayout: 'grid',
     dossier: { caseId: 'AWE-01', stamp: 'CONTAINED' },
   },
 
@@ -117,6 +119,7 @@ export const projects: Project[] = [
       { src: '/images/ninja/ninja-itch-1.webp', alt: 'Promotional art' },
       { src: '/images/ninja/ninja-itch-2.webp', alt: 'Promotional art' },
     ],
+    mediaLayout: 'grid',
     dossier: { caseId: 'INC-44', stamp: 'ONGOING' },
   },
 ];
