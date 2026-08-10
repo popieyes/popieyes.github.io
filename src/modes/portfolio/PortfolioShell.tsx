@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ModeSwitch from '../../components/ModeSwitch';
 import { useTheme } from '../../ThemeContext';
 import { profile } from '../../content/profile';
+import { useMode } from '../../ModeContext';
 
 const NAV = [
   { label: 'Research', href: '/#research' },
@@ -31,6 +32,7 @@ function ThemeToggle() {
 }
 
 export default function PortfolioShell({ children }: { children: React.ReactNode }) {
+  const {mode} = useMode();
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg)' }}>
       <a
@@ -53,11 +55,11 @@ export default function PortfolioShell({ children }: { children: React.ReactNode
               style={{ fontVariationSettings: "'wdth' 108, 'wght' 700" }}
             >
               {profile.shortName}
-              <span style={{ color: 'var(--fg-muted)' }}> Meneses</span>
+              <span style={{ color: 'var(--fg-muted)' }}> Meneses Gómez</span>
             </Link>
 
             <nav aria-label="Sections" className="hidden md:flex items-center gap-7">
-              {NAV.map((item) => (
+              { mode !='demos' && NAV.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}

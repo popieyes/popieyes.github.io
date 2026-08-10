@@ -47,7 +47,7 @@ export default function DossierShell({ children }: { children: React.ReactNode }
             to="/"
             className="font-display text-sm font-black uppercase tracking-[0.14em] text-[#f4efe2] drop-shadow"
           >
-            Case file — {profile.shortName} Meneses
+            Case file — {profile.shortName} Meneses Gómez
           </Link>
 
           <nav aria-label="Sections" className="hidden items-center gap-6 md:flex">

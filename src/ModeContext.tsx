@@ -15,7 +15,7 @@ export type Mode = (typeof MODES)[number];
  * it stays out of the UI until it's finished — a half-done costume is worse
  * than no costume. Add it back here to ship it.
  */
-export const VISIBLE_MODES: Mode[] = ['portfolio', 'demos'];
+export const VISIBLE_MODES: Mode[] = ['portfolio'];
 
 export const MODE_LABELS: Record<Mode, string> = {
   portfolio: 'Portfolio',
