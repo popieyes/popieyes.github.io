@@ -15,6 +15,27 @@ import type { Project } from './types';
  */
 
 export const projects: Project[] = [
+   {
+    slug: 'raytracing-week',
+    title: 'Ray Tracer',
+    kind: 'Physically Based Rendering',
+    role: 'Graphics Programmer',
+    stack: ['C++, CMake'],
+    summary: 'RayTracing project based on the book `Ray Tracing In One Weekend`, made for fun and to deep dive into building an offline renderer from scratch.',
+    overview: `Here we are back into another project, this time a ray tracer following the book 'Ray Tracing in One Weekend'. 
+    \n\n The book is a truly must-read if you are getting started into computer graphics, it teaches concepts pretty quickly and easy so you can begin right away doing the fun part (which is obviously coding). 
+    Anyways, following the book I managed to code this simple ray tracer, which covers some minimal features but already gives astonishing results as the one you can see in this post. For the time being, I am trying
+    something different which is documenting my learnings in my notebook (physical media in 2026, seems crazy) instead of typing them on my PC. I have come to realize that concepts stay with me better and I take a better
+    understanding out of the lessons than just by only reading them and implementing them or even copying them into a digital note-taking app. 
+    \n\n If we are talking materials and how to represent them, now I feel I have a solid knowledge at least about the ones covered in this project (Lambertian, Metallics and Dielectrics), there must be tons of 
+    concepts still out there for me to learn but the basics stay with me. After having completed the book, I do want to keep on taking it further and start deviating from the book guided structure and heading into a personal 
+    direction, something that makes the project mine, what could that be? Still unknown.
+    \n\n But stay tuned.`,
+
+    media:[{ src: '/images/raytracing-one-week/raytracing-one-weekend.webp', alt: 'Cover art' }],
+    mediaLayout: 'carousel',
+    dossier: { caseId: 'RAY-02', stamp: 'ONGOING'}
+  },
   {
     slug: 'hernan-engine',
     title: 'Hernan Engine',
